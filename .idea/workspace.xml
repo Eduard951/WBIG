@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4567de1e-b332-48be-9254-1abce1a4d4ae" name="Changes" comment="initial commit">
+    <list default="true" id="4567de1e-b332-48be-9254-1abce1a4d4ae" name="Changes" comment="added files from eduard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/wbig/Store_Standards.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/wbig/Store_Standards.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/wbig.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/wbig.bpmn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/wbig/Store_Standards.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/wbig/Store_Standards.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/wbig.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/wbig.bpmn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/wbig-0.1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/wbig-0.1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/wbig-0.1.0-SNAPSHOT/WEB-INF/classes/org/wbig/Store_Standards.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/wbig-0.1.0-SNAPSHOT/WEB-INF/classes/org/wbig/Store_Standards.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/wbig-0.1.0-SNAPSHOT/WEB-INF/classes/wbig.bpmn" beforeDir="false" afterPath="$PROJECT_DIR$/target/wbig-0.1.0-SNAPSHOT/WEB-INF/classes/wbig.bpmn" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +88,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1643184548075</updated>
-      <workItem from="1643184550356" duration="15736000" />
+      <workItem from="1643184550356" duration="19274000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1643185187512</created>
@@ -94,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643185187512</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added files from eduard">
+      <created>1643303695575</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1643303695575</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -113,6 +123,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="added files from eduard" />
+    <option name="LAST_COMMIT_MESSAGE" value="added files from eduard" />
   </component>
 </project>

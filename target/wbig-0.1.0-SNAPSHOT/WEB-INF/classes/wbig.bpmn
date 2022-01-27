@@ -584,9 +584,7 @@
           <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
         </extensionElements>
         <flowNodeRef>Event_11cyy1i</flowNodeRef>
-        <flowNodeRef>Collecting-Job-Information</flowNodeRef>
         <flowNodeRef>Identify_Missing</flowNodeRef>
-        <flowNodeRef>Forward_Job_Information</flowNodeRef>
         <flowNodeRef>Create_Information</flowNodeRef>
         <flowNodeRef>Event_1d6h6aj</flowNodeRef>
         <flowNodeRef>StartEvent_1</flowNodeRef>
@@ -599,7 +597,6 @@
         <flowNodeRef>First_Interview</flowNodeRef>
         <flowNodeRef>Candidate_Rejected</flowNodeRef>
         <flowNodeRef>Gateway_1qb1ezi</flowNodeRef>
-        <flowNodeRef>Send_Rejection</flowNodeRef>
         <flowNodeRef>Delete_Candidate</flowNodeRef>
         <flowNodeRef>Event_1xghvzu</flowNodeRef>
         <flowNodeRef>Gateway_0nj6ywm</flowNodeRef>
@@ -609,7 +606,6 @@
         <flowNodeRef>Inive_Second_Interview</flowNodeRef>
         <flowNodeRef>Store_Decision</flowNodeRef>
         <flowNodeRef>Candidate_approved_HR</flowNodeRef>
-        <flowNodeRef>Send_Approval</flowNodeRef>
         <flowNodeRef>Check_Signing</flowNodeRef>
         <flowNodeRef>Gateway_18o5nje</flowNodeRef>
         <flowNodeRef>Event_1mpq7qq</flowNodeRef>
@@ -619,6 +615,10 @@
         <flowNodeRef>Event_1o2awrf</flowNodeRef>
         <flowNodeRef>Rating_Decision</flowNodeRef>
         <flowNodeRef>Event_0pijhna</flowNodeRef>
+        <flowNodeRef>Send_Rejection</flowNodeRef>
+        <flowNodeRef>Send_Approval</flowNodeRef>
+        <flowNodeRef>Forward_Job_Information</flowNodeRef>
+        <flowNodeRef>Collecting-Job-Information</flowNodeRef>
       </lane>
       <lane id="sid-9F84BD70-5E5B-4B3D-8520-A51028034E40" name="HR Manager">
         <extensionElements>
@@ -635,22 +635,9 @@
       <outgoing>Flow_0q5q4ar</outgoing>
       <messageEventDefinition id="MessageEventDefinition_0qi4xhi" messageRef="Message_1a6u354" />
     </intermediateCatchEvent>
-    <userTask id="Collecting-Job-Information" name="Collecting job information" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Job_Description" label="Job Description" type="string" />
-          <camunda:formField id="Job_start_date" label="Start Date" type="date" />
-          <camunda:formField id="Job_End_date" label="End Date" type="date" />
-          <camunda:formField id="Job_Salary" label="Approximate Annual Salary in €" type="long" />
-          <camunda:formField id="Job_Name" label="Job Name" type="string" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_1xjicmo</incoming>
-      <outgoing>Flow_0s0n8i4</outgoing>
-    </userTask>
     <serviceTask id="Identify_Missing" name="Identify missing information" implementation="##unspecified" camunda:class="Identify_Missing">
       <incoming>Flow_0q5q4ar</incoming>
-      <outgoing>Flow_1ym7dei</outgoing>
+      <outgoing>Flow_1inzrfw</outgoing>
       <dataOutputAssociation id="DataOutputAssociation_1563ee4">
         <targetRef>DataStoreReference_0vytfs6</targetRef>
       </dataOutputAssociation>
@@ -673,18 +660,9 @@
           <camunda:formField id="Required_Extras" label="Required Extraordinary Skills" type="string" />
         </camunda:formData>
       </extensionElements>
-      <incoming>Flow_0bn60me</incoming>
+      <incoming>Flow_0dgrtux</incoming>
       <outgoing>sid-CC787CD7-8929-4563-B423-646DAB69C4EC</outgoing>
     </userTask>
-    <exclusiveGateway id="Forward_Job_Information" name="" gatewayDirection="Converging" camunda:asyncBefore="true">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-      <incoming>Flow_0s0n8i4</incoming>
-      <incoming>Flow_1ym7dei</incoming>
-      <outgoing>Flow_0bn60me</outgoing>
-    </exclusiveGateway>
     <serviceTask id="Store_Standards" name="Store standards of eligibility in database" camunda:class="org.wbig.Store_Standards">
       <extensionElements>
         <camunda:inputOutput>
@@ -742,7 +720,7 @@
         <signavio:signavioMetaData metaKey="vorgngerprozesse" metaValue="[]" />
         <signavio:signavioLabel align="left" ref="text_name" x="3.0" y="40.0" />
       </extensionElements>
-      <outgoing>Flow_1xjicmo</outgoing>
+      <outgoing>Flow_011spsz</outgoing>
     </startEvent>
     <intermediateCatchEvent id="Event_03el599" name="Candidate info received">
       <extensionElements>
@@ -825,10 +803,6 @@
       <outgoing>Flow_1l96gog</outgoing>
       <outgoing>Flow_15njq6d</outgoing>
     </parallelGateway>
-    <serviceTask id="Send_Rejection" name="Send Rejection to candidate" camunda:class="Send_Rejection">
-      <incoming>Flow_1l96gog</incoming>
-      <outgoing>Flow_10iz4ku</outgoing>
-    </serviceTask>
     <serviceTask id="Delete_Candidate" name="Delete Candidate from Database" camunda:class="Delete_Candidate">
       <incoming>Flow_10iz4ku</incoming>
       <outgoing>Flow_1or71zt</outgoing>
@@ -919,16 +893,6 @@
       <outgoing>Flow_1tso9sf</outgoing>
       <outgoing>Flow_0yhbqua</outgoing>
     </exclusiveGateway>
-    <serviceTask id="Send_Approval" name="Send Approval to candidate" camunda:class="Send_Approval">
-      <extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="Input_3s4tec3" />
-          <camunda:outputParameter name="Output_3377svc" />
-        </camunda:inputOutput>
-      </extensionElements>
-      <incoming>Flow_1tso9sf</incoming>
-      <outgoing>Flow_1g9s970</outgoing>
-    </serviceTask>
     <userTask id="Check_Signing" name="Check for Signing" camunda:assignee="Recruiter">
       <extensionElements>
         <camunda:formData>
@@ -1066,22 +1030,7 @@
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
       </extensionElements>
     </sequenceFlow>
-    <sequenceFlow id="Flow_0s0n8i4" name="" isImmediate="true" sourceRef="Collecting-Job-Information" targetRef="Forward_Job_Information">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-    </sequenceFlow>
-    <sequenceFlow id="Flow_1ym7dei" name="" isImmediate="true" sourceRef="Identify_Missing" targetRef="Forward_Job_Information">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-    </sequenceFlow>
     <sequenceFlow id="Flow_0av22bp" name="" isImmediate="true" sourceRef="Event_1d6h6aj" targetRef="Event_03el599">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-    </sequenceFlow>
-    <sequenceFlow id="Flow_1xjicmo" name="" isImmediate="true" sourceRef="StartEvent_1" targetRef="Collecting-Job-Information">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
       </extensionElements>
@@ -1111,11 +1060,50 @@
     </sequenceFlow>
     <sequenceFlow id="Flow_19js8po" sourceRef="First_Interview" targetRef="Make_Decision" />
     <sequenceFlow id="Flow_0js4sik" sourceRef="Make_Decision" targetRef="Decision_Recruiter" />
-    <sequenceFlow id="Flow_0bn60me" sourceRef="Forward_Job_Information" targetRef="Create_Standards" />
     <sequenceFlow id="Flow_00mr8f0" sourceRef="Store_Standards" targetRef="Create_Information" />
     <sequenceFlow id="Flow_1yktk21" sourceRef="Inive_Second_Interview" targetRef="Second_Interview" />
     <sequenceFlow id="Flow_0zho4ik" sourceRef="Approve_Candidate" targetRef="Initiate_Interview" />
     <sequenceFlow id="Flow_11vbh3g" sourceRef="Send_Employee_Info" targetRef="Pay_Invoice" />
+    <manualTask id="Send_Rejection" name="Send Rejection to candidate">
+      <incoming>Flow_1l96gog</incoming>
+      <outgoing>Flow_10iz4ku</outgoing>
+    </manualTask>
+    <manualTask id="Send_Approval" name="Send Approval to candidate">
+      <extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_3s4tec3" />
+          <camunda:outputParameter name="Output_3377svc" />
+        </camunda:inputOutput>
+      </extensionElements>
+      <incoming>Flow_1tso9sf</incoming>
+      <outgoing>Flow_1g9s970</outgoing>
+    </manualTask>
+    <exclusiveGateway id="Forward_Job_Information" name="" gatewayDirection="Converging" camunda:asyncBefore="true">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+      <incoming>Flow_011spsz</incoming>
+      <incoming>Flow_1inzrfw</incoming>
+      <outgoing>Flow_1rtyngd</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_011spsz" sourceRef="StartEvent_1" targetRef="Forward_Job_Information" />
+    <sequenceFlow id="Flow_1inzrfw" sourceRef="Identify_Missing" targetRef="Forward_Job_Information" />
+    <sequenceFlow id="Flow_1rtyngd" sourceRef="Forward_Job_Information" targetRef="Collecting-Job-Information" />
+    <sequenceFlow id="Flow_0dgrtux" sourceRef="Collecting-Job-Information" targetRef="Create_Standards" />
+    <userTask id="Collecting-Job-Information" name="Collecting job information" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Job_Description" label="Job Description" type="string" />
+          <camunda:formField id="Job_start_date" label="Start Date" type="date" />
+          <camunda:formField id="Job_End_date" label="End Date" type="date" />
+          <camunda:formField id="Job_Salary" label="Approximate Annual Salary in €" type="long" />
+          <camunda:formField id="Job_Name" label="Job Name" type="string" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_1rtyngd</incoming>
+      <outgoing>Flow_0dgrtux</outgoing>
+    </userTask>
   </process>
   <message id="Message_0eyb8f5" name="Job_Information" />
   <message id="Message_0ne5ynd" />
@@ -1521,10 +1509,6 @@
         <omgdi:waypoint x="730" y="320" />
         <omgdi:waypoint x="730" y="608" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0bn60me_di" bpmnElement="Flow_0bn60me">
-        <omgdi:waypoint x="570" y="560" />
-        <omgdi:waypoint x="570" y="320" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0js4sik_di" bpmnElement="Flow_0js4sik">
         <omgdi:waypoint x="2070" y="555" />
         <omgdi:waypoint x="2155" y="555" />
@@ -1593,22 +1577,9 @@
         <omgdi:waypoint x="1620" y="725" />
         <omgdi:waypoint x="1695" y="725" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xjicmo_gui" bpmnElement="Flow_1xjicmo">
-        <omgdi:waypoint x="301" y="580" />
-        <omgdi:waypoint x="381" y="580" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0av22bp_gui" bpmnElement="Flow_0av22bp">
         <omgdi:waypoint x="895" y="648" />
         <omgdi:waypoint x="1015" y="648" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1ym7dei_gui" bpmnElement="Flow_1ym7dei">
-        <omgdi:waypoint x="481" y="695" />
-        <omgdi:waypoint x="570" y="695" />
-        <omgdi:waypoint x="570" y="600" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0s0n8i4_gui" bpmnElement="Flow_0s0n8i4">
-        <omgdi:waypoint x="481" y="580" />
-        <omgdi:waypoint x="550" y="580" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1g4h36k_gui" bpmnElement="Flow_1g4h36k">
         <omgdi:waypoint x="2615" y="650" />
@@ -1707,23 +1678,33 @@
         <omgdi:waypoint x="2120" y="695" />
         <omgdi:waypoint x="2120" y="770" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_011spsz_di" bpmnElement="Flow_011spsz">
+        <omgdi:waypoint x="301" y="580" />
+        <omgdi:waypoint x="411" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1inzrfw_di" bpmnElement="Flow_1inzrfw">
+        <omgdi:waypoint x="431" y="655" />
+        <omgdi:waypoint x="431" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rtyngd_di" bpmnElement="Flow_1rtyngd">
+        <omgdi:waypoint x="451" y="580" />
+        <omgdi:waypoint x="520" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dgrtux_di" bpmnElement="Flow_0dgrtux">
+        <omgdi:waypoint x="570" y="540" />
+        <omgdi:waypoint x="570" y="320" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0211jzp_di" bpmnElement="Event_11cyy1i">
         <omgdc:Bounds x="413" y="757" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="347.5" y="761" width="55" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1vd32sj_di" bpmnElement="Collecting-Job-Information">
-        <omgdc:Bounds x="381" y="540" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0irhh0h_di" bpmnElement="Identify_Missing">
         <omgdc:Bounds x="381" y="655" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0zf9x7u_di" bpmnElement="Create_Standards">
         <omgdc:Bounds x="520" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1pvsily_gui" bpmnElement="Forward_Job_Information" isMarkerVisible="true">
-        <omgdc:Bounds x="550" y="560" width="40" height="40" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0manlb1_di" bpmnElement="Store_Standards">
         <omgdc:Bounds x="680" y="240" width="100" height="80" />
@@ -1818,9 +1799,6 @@
       <bpmndi:BPMNShape id="Gateway_1qb1ezi_gui" bpmnElement="Gateway_1qb1ezi">
         <omgdc:Bounds x="1790" y="770" width="40" height="40" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1p9gwjl_di" bpmnElement="Send_Rejection">
-        <omgdc:Bounds x="1760" y="655" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1gyd8f6_di" bpmnElement="Delete_Candidate">
         <omgdc:Bounds x="1970" y="655" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -1878,9 +1856,6 @@
           <omgdc:Bounds x="2544" y="526" width="56" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0d61b2a_di" bpmnElement="Send_Approval">
-        <omgdc:Bounds x="2810" y="500" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0r1lhy1_di" bpmnElement="Check_Signing">
         <omgdc:Bounds x="2990" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -1934,6 +1909,18 @@
         <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
           <omgdc:Bounds x="2628" y="675" width="51" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cqj66r_di" bpmnElement="Send_Rejection">
+        <omgdc:Bounds x="1760" y="655" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_089j3y5_di" bpmnElement="Send_Approval">
+        <omgdc:Bounds x="2810" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1pvsily_gui" bpmnElement="Forward_Job_Information" isMarkerVisible="true">
+        <omgdc:Bounds x="411" y="560" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vd32sj_di" bpmnElement="Collecting-Job-Information">
+        <omgdc:Bounds x="520" y="540" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_1ojr1ra_gui" bpmnElement="DataInputAssociation_1ojr1ra">
         <omgdi:waypoint x="953" y="1249" />

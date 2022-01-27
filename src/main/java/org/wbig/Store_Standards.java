@@ -33,6 +33,6 @@ public class Store_Standards implements JavaDelegate{
         String standards = "Description:" + job_description + ", Skills: "+ job_skills + ", Education: "+ job_education + ", Accreditations: "+ job_accreditations + ", Extras: "+ job_extras;
 
         LOGGER.info(standards);
-        Database.createJob(job_name, job_description_recruiter,standards, job_salary, "Main Building NY",job_skills);
+        //Database.createJob(job_name, job_description_recruiter,standards, job_salary, "Main Building NY",job_skills);
     }
 }
