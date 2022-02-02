@@ -2,12 +2,14 @@ package org.wbig;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+
 import java.util.logging.Logger;
 
-public class Create_Opening_Information implements JavaDelegate{
+public class Save_Candidate_Info implements JavaDelegate {
+
     private final static Logger LOGGER = Logger.getLogger("LOAN-REQUESTS");
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        LOGGER.info("CREATED OPENING JOB INFORMATION");
+        LOGGER.info("receiving.......................");
     }
 }

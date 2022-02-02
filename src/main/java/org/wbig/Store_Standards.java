@@ -3,15 +3,16 @@ package org.wbig;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-
-import java.util.Date;
-
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.logging.Logger;
+import java.net.URL;
+import java.net.HttpURLConnection;
 
 public class Store_Standards implements JavaDelegate{
 
     private final static Logger LOGGER = Logger.getLogger("LOAN-REQUESTS");
+
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {
