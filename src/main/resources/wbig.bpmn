@@ -1112,7 +1112,7 @@
     <intermediateThrowEvent id="Event_1mpq7qq" name="Ask for new appllicants">
       <incoming>Flow_0qggprg</incoming>
       <outgoing>Flow_00h6o94</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_1dhwqkl" />
+      <messageEventDefinition id="MessageEventDefinition_1dhwqkl" messageRef="Message_156d686" camunda:class="org.wbig.New_Applicants" />
     </intermediateThrowEvent>
     <sequenceFlow id="Flow_00h6o94" sourceRef="Event_1mpq7qq" targetRef="Gateway_0e7kkne" />
   </process>
@@ -1141,6 +1141,7 @@
   <message id="Message_1uwljyf" name="Message_0et3jrb" />
   <message id="Message_11qsw4n" name="Receive_Invoice" />
   <message id="Message_0gfwiqo" name="No_more_candidates" />
+  <message id="Message_156d686" name="Message_3e34ssn" />
   <bpmndi:BPMNDiagram id="sid-b8176f82-affc-4f98-bb91-8427c2a8a9bf">
     <bpmndi:BPMNPlane id="sid-629350ca-9e37-486d-9889-7c0d9b434fe1" bpmnElement="WBIG">
       <bpmndi:BPMNShape id="Participant_0owlfta_gui" bpmnElement="Participant_0owlfta" isHorizontal="true">
