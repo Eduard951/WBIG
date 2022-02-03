@@ -1,48 +1,59 @@
 package org.wbig;
 
+import org.camunda.bpm.engine.delegate.JavaDelegate;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Database {
+public class Database{
 
     static Connection conn;
 
-    public Database() throws SQLException {
+
+    public Database() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         conn = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
+
     }
 
-    public static void createCandidate(String firstName, String lastName, String dob, String address, int phoneNumber, String email, String qualifications, String skills) throws SQLException {
+    public static void createCandidate(String firstName, String lastName, String dob, String address, int phoneNumber, String email, String qualifications, String skills) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO Candidate (FirstName,LastName,DOB,Address,PhoneNumber,email,Qualifications,Skills) VALUES("+firstName+","+lastName+","+dob+","+address+","+phoneNumber+","+email+","+qualifications+","+skills+");");
     }
 
-    public static void createJob(String name, String description, String stardards, double salary, String location, String skills) throws SQLException {
+    public static void createJob(String name, String description, String stardards, double salary, String location, String skills) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO Job (Name,Description,StandardOfEligibility,Salary,Location,Skills) VALUES("+name+","+description+","+stardards+","+salary+","+location+","+skills+");");
     }
 
-    public static void createInvoice(int fee) throws SQLException {
+    public static void createInvoice(int fee) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO Invoice (Fee) VALUES("+fee+");");
     }
 
-    public static void createEmployee(String firstName, String lastName, String dob, String address, int phoneNumber, String email, String job, String jobDescription,int hours, String duties) throws SQLException {
+    public static void createEmployee(String firstName, String lastName, String dob, String address, int phoneNumber, String email, String job, String jobDescription,int hours, String duties) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO Employee (FirstName,LastName,DOB,Address,PhoneNumber,email,Job,JobDescription,HoursPerWeek,Duties) VALUES("+firstName+","+lastName+","+dob+","+address+","+phoneNumber+","+email+","+job+","+jobDescription+","+hours+","+duties+");");
     }
 
-    public static void changeCandidateStatus(int candidate_id, boolean eligible)throws SQLException{
+    public static void changeCandidateStatus(int candidate_id, boolean eligible) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("UPDATE Candidate SET IsEligible = "+eligible+" WHERE Candidate_ID = "+candidate_id+";");
     }
 
-    public static List<String> getCandidate(int candidate_id) throws SQLException {
+    public static List<String> getCandidate(int candidate_id) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         ArrayList<String> arrayList = new ArrayList<String>();
         Statement stmt = con.createStatement();
@@ -62,7 +73,8 @@ public class Database {
     }
 
 
-    public static List<String> getJob ( int job_id) throws SQLException {
+    public static List<String> getJob ( int job_id) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         ArrayList<String> arrayList = new ArrayList<String>();
         Statement stmt = con.createStatement();
@@ -79,7 +91,8 @@ public class Database {
         return arrayList;
     }
 
-    public static List<String> getInvoice ( int invoice_id) throws SQLException {
+    public static List<String> getInvoice ( int invoice_id) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         ArrayList<String> arrayList = new ArrayList<String>();
         Statement stmt = con.createStatement();
@@ -91,7 +104,8 @@ public class Database {
         return arrayList;
     }
 
-    public static List<String> getEmployee ( int employee_id) throws SQLException {
+    public static List<String> getEmployee ( int employee_id) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
         ArrayList<String> arrayList = new ArrayList<String>();
         Statement stmt = con.createStatement();
@@ -115,5 +129,11 @@ public class Database {
     public static String formatString(String text){
         text = "'"+text+"'";
         return text;
+    }
+
+    public static void deleteCandidate(int ID) throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://141.26.157.254:3306/wbig", "WBIG", "wbig");
+        Statement stmt = con.createStatement();
     }
 }

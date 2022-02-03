@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 import java.net.URL;
 import java.net.HttpURLConnection;
@@ -25,15 +26,16 @@ public class Store_Standards implements JavaDelegate{
         String job_name = (String) execution.getVariable("Job_Name");
 
 
-        String job_description = (String) execution.getVariable("Required_Experience");
+        String job_experience = (String) execution.getVariable("Required_Experience");
         String job_skills = (String) execution.getVariable("Required_skills");
         String job_education = (String) execution.getVariable("Required_Education");
         String job_accreditations = (String) execution.getVariable("Required_accreditations");
         String job_extras = (String) execution.getVariable("Required_Extras");
 
-        String standards = "Description:" + job_description + ", Skills: "+ job_skills + ", Education: "+ job_education + ", Accreditations: "+ job_accreditations + ", Extras: "+ job_extras;
+        String standards = "Description:" + job_description_recruiter + ", Skills: "+ job_skills + ", Education: "+ job_education + ", Accreditations: "+ job_accreditations + ", Extras: "+ job_extras;
 
         LOGGER.info(standards);
         //Database.createJob(job_name, job_description_recruiter,standards, job_salary, "Main Building NY",job_skills);
+        LOGGER.info((Database.getCandidate(1).get(0)));
     }
 }

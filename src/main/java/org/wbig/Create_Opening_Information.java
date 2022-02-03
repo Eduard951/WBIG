@@ -8,6 +8,7 @@ public class Create_Opening_Information implements JavaDelegate{
     private final static Logger LOGGER = Logger.getLogger("LOAN-REQUESTS");
     @Override
     public void execute(DelegateExecution execution) throws Exception {
+        //Database.createJob();
         LOGGER.info("CREATED OPENING JOB INFORMATION");
     }
 }

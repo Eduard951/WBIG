@@ -592,7 +592,6 @@
           <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
         </extensionElements>
         <flowNodeRef>Event_11cyy1i</flowNodeRef>
-        <flowNodeRef>Identify_Missing</flowNodeRef>
         <flowNodeRef>Create_Information</flowNodeRef>
         <flowNodeRef>Event_1d6h6aj</flowNodeRef>
         <flowNodeRef>StartEvent_1</flowNodeRef>
@@ -608,7 +607,6 @@
         <flowNodeRef>Delete_Candidate</flowNodeRef>
         <flowNodeRef>Event_1xghvzu</flowNodeRef>
         <flowNodeRef>Gateway_0nj6ywm</flowNodeRef>
-        <flowNodeRef>Event_1mqfq6m</flowNodeRef>
         <flowNodeRef>Make_Decision</flowNodeRef>
         <flowNodeRef>Decision_Recruiter</flowNodeRef>
         <flowNodeRef>Inive_Second_Interview</flowNodeRef>
@@ -616,7 +614,6 @@
         <flowNodeRef>Candidate_approved_HR</flowNodeRef>
         <flowNodeRef>Check_Signing</flowNodeRef>
         <flowNodeRef>Gateway_18o5nje</flowNodeRef>
-        <flowNodeRef>Event_1mpq7qq</flowNodeRef>
         <flowNodeRef>Hire_Candidate</flowNodeRef>
         <flowNodeRef>Event_1o2awrf</flowNodeRef>
         <flowNodeRef>Rating_Decision</flowNodeRef>
@@ -627,6 +624,10 @@
         <flowNodeRef>Send_Employee_Info</flowNodeRef>
         <flowNodeRef>Event_05l1wt8</flowNodeRef>
         <flowNodeRef>Pay_Invoice</flowNodeRef>
+        <flowNodeRef>Event_1d8mv8n</flowNodeRef>
+        <flowNodeRef>Event_0j4zbu8</flowNodeRef>
+        <flowNodeRef>Gateway_0e7kkne</flowNodeRef>
+        <flowNodeRef>Event_1mpq7qq</flowNodeRef>
       </lane>
       <lane id="sid-9F84BD70-5E5B-4B3D-8520-A51028034E40" name="HR Manager">
         <extensionElements>
@@ -640,16 +641,10 @@
       </lane>
     </laneSet>
     <intermediateCatchEvent id="Event_11cyy1i" name="Notification received">
-      <outgoing>Flow_0q5q4ar</outgoing>
+      <incoming>Flow_1bd7qsx</incoming>
+      <outgoing>Flow_157orwx</outgoing>
       <messageEventDefinition id="MessageEventDefinition_0qi4xhi" messageRef="Message_1a6u354" />
     </intermediateCatchEvent>
-    <serviceTask id="Identify_Missing" name="Identify missing information" implementation="##unspecified" camunda:class="org.wbig.Identify_Missing">
-      <incoming>Flow_0q5q4ar</incoming>
-      <outgoing>Flow_1inzrfw</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_1563ee4">
-        <targetRef>DataStoreReference_0vytfs6</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
     <userTask id="Create_Standards" name="Create standards of eligibility" camunda:assignee="HrManager">
       <extensionElements>
         <camunda:formData>
@@ -736,7 +731,7 @@
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
         <signavio:signavioLabel align="left" ref="text_name" x="-20.0" y="-33.0" />
       </extensionElements>
-      <incoming>Flow_0av22bp</incoming>
+      <incoming>Flow_0d82wo2</incoming>
       <outgoing>Flow_16l3jsr</outgoing>
       <messageEventDefinition id="sid-fefa86fe-dfcf-4bf2-8e02-b53eac8177a9" messageRef="Message_0w8fs2h" />
     </intermediateCatchEvent>
@@ -835,17 +830,8 @@
       </extensionElements>
       <incoming>Flow_0rme5jk</incoming>
       <incoming>Flow_1or71zt</incoming>
-      <outgoing>Flow_1tr2cnn</outgoing>
+      <outgoing>Flow_1aeegry</outgoing>
     </parallelGateway>
-    <endEvent id="Event_1mqfq6m" name="Candidate ultimately rejected">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]" />
-        <signavio:signavioLabel align="left" ref="text_name" x="-28.0" y="40.0" />
-      </extensionElements>
-      <incoming>Flow_1tr2cnn</incoming>
-    </endEvent>
     <userTask id="Make_Decision" name="Make decision" camunda:assignee="Recruiter">
       <extensionElements>
         <camunda:formData>
@@ -915,10 +901,6 @@
       <outgoing>Flow_05ba9dv</outgoing>
       <outgoing>Flow_0qggprg</outgoing>
     </exclusiveGateway>
-    <endEvent id="Event_1mpq7qq" name="Ask for new appllicants">
-      <incoming>Flow_0qggprg</incoming>
-      <messageEventDefinition id="MessageEventDefinition_0xir1yw" messageRef="Message_03lyxnf" camunda:class="org.wbig.Ask_Applicants" />
-    </endEvent>
     <userTask id="Hire_Candidate" name="Hire candidate" camunda:assignee="Recruiter">
       <extensionElements>
         <camunda:formData>
@@ -926,7 +908,7 @@
           <camunda:formField id="End_Date" label="Enter End Date" type="date" />
           <camunda:formField id="Surname" label="Surname" type="string" />
           <camunda:formField id="First_Name" label="First Name" type="string" />
-          <camunda:formField id="E-Mail" label="E-Mail" type="string" />
+          <camunda:formField id="E_Mail" label="E-Mail" type="string" />
           <camunda:formField id="Phone_Number" label="Phone Number" type="long" />
           <camunda:formField id="Department" label="Department" type="string" />
         </camunda:formData>
@@ -947,7 +929,6 @@
       </extensionElements>
       <incoming>Flow_0q3t2it</incoming>
     </endEvent>
-    <dataStoreReference id="DataStoreReference_0vytfs6" name="Database" />
     <userTask id="Rating_Decision" name="Rating decision" camunda:assignee="Recruiter">
       <extensionElements>
         <camunda:formData>
@@ -982,11 +963,6 @@
     <sequenceFlow id="Flow_1tso9sf" name="Yes" sourceRef="Candidate_approved_HR" targetRef="Send_Approval">
       <conditionExpression xsi:type="tFormalExpression">#{Candidate_Approval1==true}</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="Flow_1tr2cnn" name="" isImmediate="true" sourceRef="Gateway_0nj6ywm" targetRef="Event_1mqfq6m">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-    </sequenceFlow>
     <sequenceFlow id="Flow_0rme5jk" name="" isImmediate="true" sourceRef="Event_1xghvzu" targetRef="Gateway_0nj6ywm">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
@@ -1005,7 +981,6 @@
     <sequenceFlow id="Flow_19plclx" name="No" sourceRef="Decision_Recruiter" targetRef="Candidate_Rejected">
       <conditionExpression xsi:type="tFormalExpression">#{Candidate_Approval==false}</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="Flow_0q5q4ar" sourceRef="Event_11cyy1i" targetRef="Identify_Missing" />
     <sequenceFlow id="Flow_0lvzr23" name="" isImmediate="true" sourceRef="Rating_Decision" targetRef="Candidate_approved_Recruiter">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
@@ -1021,7 +996,7 @@
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
       </extensionElements>
     </sequenceFlow>
-    <sequenceFlow id="Flow_0av22bp" name="" isImmediate="true" sourceRef="Event_1d6h6aj" targetRef="Event_03el599">
+    <sequenceFlow id="Flow_0av22bp" name="" isImmediate="true" sourceRef="Event_1d6h6aj" targetRef="Gateway_0e7kkne">
       <extensionElements>
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
       </extensionElements>
@@ -1070,11 +1045,10 @@
         <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
       </extensionElements>
       <incoming>Flow_011spsz</incoming>
-      <incoming>Flow_1inzrfw</incoming>
+      <incoming>Flow_157orwx</incoming>
       <outgoing>Flow_1rtyngd</outgoing>
     </exclusiveGateway>
     <sequenceFlow id="Flow_011spsz" sourceRef="StartEvent_1" targetRef="Forward_Job_Information" />
-    <sequenceFlow id="Flow_1inzrfw" sourceRef="Identify_Missing" targetRef="Forward_Job_Information" />
     <sequenceFlow id="Flow_1rtyngd" sourceRef="Forward_Job_Information" targetRef="Collecting-Job-Information" />
     <sequenceFlow id="Flow_0dgrtux" sourceRef="Collecting-Job-Information" targetRef="Create_Standards" />
     <userTask id="Collecting-Job-Information" name="Collecting job information" camunda:assignee="Recruiter">
@@ -1085,6 +1059,7 @@
           <camunda:formField id="Job_End_date" label="End Date" type="date" />
           <camunda:formField id="Job_Salary" label="Approximate Annual Salary in €" type="long" />
           <camunda:formField id="Job_Name" label="Job Name" type="string" />
+          <camunda:formField id="Job_Address" label="Job Address" type="string" />
         </camunda:formData>
       </extensionElements>
       <incoming>Flow_1rtyngd</incoming>
@@ -1112,6 +1087,34 @@
       <incoming>Flow_05324j2</incoming>
       <outgoing>Flow_0q3t2it</outgoing>
     </sendTask>
+    <sequenceFlow id="Flow_1aeegry" sourceRef="Gateway_0nj6ywm" targetRef="Gateway_0e7kkne" />
+    <sequenceFlow id="Flow_0d82wo2" sourceRef="Gateway_0e7kkne" targetRef="Event_03el599" />
+    <intermediateCatchEvent id="Event_1d8mv8n" name="Receive info message">
+      <incoming>Flow_0bwixd6</incoming>
+      <outgoing>Flow_191lnu5</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_023lm7o" messageRef="Message_0gfwiqo" />
+    </intermediateCatchEvent>
+    <sequenceFlow id="Flow_0bwixd6" sourceRef="Gateway_0e7kkne" targetRef="Event_1d8mv8n" />
+    <endEvent id="Event_0j4zbu8" name="No more candidates">
+      <incoming>Flow_191lnu5</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_191lnu5" sourceRef="Event_1d8mv8n" targetRef="Event_0j4zbu8" />
+    <sequenceFlow id="Flow_1bd7qsx" sourceRef="Gateway_0e7kkne" targetRef="Event_11cyy1i" />
+    <sequenceFlow id="Flow_157orwx" sourceRef="Event_11cyy1i" targetRef="Forward_Job_Information" />
+    <eventBasedGateway id="Gateway_0e7kkne">
+      <incoming>Flow_0av22bp</incoming>
+      <incoming>Flow_1aeegry</incoming>
+      <incoming>Flow_00h6o94</incoming>
+      <outgoing>Flow_0d82wo2</outgoing>
+      <outgoing>Flow_0bwixd6</outgoing>
+      <outgoing>Flow_1bd7qsx</outgoing>
+    </eventBasedGateway>
+    <intermediateThrowEvent id="Event_1mpq7qq" name="Ask for new appllicants">
+      <incoming>Flow_0qggprg</incoming>
+      <outgoing>Flow_00h6o94</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_1dhwqkl" />
+    </intermediateThrowEvent>
+    <sequenceFlow id="Flow_00h6o94" sourceRef="Event_1mpq7qq" targetRef="Gateway_0e7kkne" />
   </process>
   <message id="Message_0eyb8f5" name="Job_Information" />
   <message id="Message_0ne5ynd" />
@@ -1132,11 +1135,12 @@
   <message id="Message_0k7nl9j" name="Message_08akgaa" />
   <message id="Message_16vsxnr" name="Message_0cj9qve" />
   <message id="Message_1u7ji4j" name="Message_3t6ccrr" />
-  <message id="Message_1a6u354" name="Message_0ecel4j" />
+  <message id="Message_1a6u354" name="job_status" />
   <message id="Message_11hv4lq" name="JobInformationRequest" />
   <message id="Message_1me6and" name="JobInformation" />
   <message id="Message_1uwljyf" name="Message_0et3jrb" />
   <message id="Message_11qsw4n" name="Receive_Invoice" />
+  <message id="Message_0gfwiqo" name="No_more_candidates" />
   <bpmndi:BPMNDiagram id="sid-b8176f82-affc-4f98-bb91-8427c2a8a9bf">
     <bpmndi:BPMNPlane id="sid-629350ca-9e37-486d-9889-7c0d9b434fe1" bpmnElement="WBIG">
       <bpmndi:BPMNShape id="Participant_0owlfta_gui" bpmnElement="Participant_0owlfta" isHorizontal="true">
@@ -1520,10 +1524,6 @@
         <omgdi:waypoint x="451" y="580" />
         <omgdi:waypoint x="520" y="580" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1inzrfw_di" bpmnElement="Flow_1inzrfw">
-        <omgdi:waypoint x="431" y="655" />
-        <omgdi:waypoint x="431" y="600" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_011spsz_di" bpmnElement="Flow_011spsz">
         <omgdi:waypoint x="301" y="580" />
         <omgdi:waypoint x="411" y="580" />
@@ -1610,7 +1610,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0av22bp_gui" bpmnElement="Flow_0av22bp">
         <omgdi:waypoint x="895" y="648" />
-        <omgdi:waypoint x="1015" y="648" />
+        <omgdi:waypoint x="935" y="648" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1g4h36k_gui" bpmnElement="Flow_1g4h36k">
         <omgdi:waypoint x="2615" y="650" />
@@ -1624,10 +1624,6 @@
       <bpmndi:BPMNEdge id="Flow_0lvzr23_gui" bpmnElement="Flow_0lvzr23">
         <omgdi:waypoint x="1360" y="648" />
         <omgdi:waypoint x="1430" y="648" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0q5q4ar_di" bpmnElement="Flow_0q5q4ar">
-        <omgdi:waypoint x="431" y="757" />
-        <omgdi:waypoint x="431" y="735" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_19plclx_di" bpmnElement="Flow_19plclx">
         <omgdi:waypoint x="2180" y="580" />
@@ -1650,10 +1646,6 @@
       <bpmndi:BPMNEdge id="Flow_0rme5jk_gui" bpmnElement="Flow_0rme5jk">
         <omgdi:waypoint x="1975" y="790" />
         <omgdi:waypoint x="2100" y="790" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1tr2cnn_gui" bpmnElement="Flow_1tr2cnn">
-        <omgdi:waypoint x="2140" y="790" />
-        <omgdi:waypoint x="2175" y="790" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1tso9sf_di" bpmnElement="Flow_1tso9sf">
         <omgdi:waypoint x="2650" y="540" />
@@ -1714,14 +1706,48 @@
         <omgdi:waypoint x="3648" y="540" />
         <omgdi:waypoint x="3680" y="540" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1aeegry_di" bpmnElement="Flow_1aeegry">
+        <omgdi:waypoint x="2120" y="810" />
+        <omgdi:waypoint x="2120" y="880" />
+        <omgdi:waypoint x="1000" y="880" />
+        <omgdi:waypoint x="964" y="669" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d82wo2_di" bpmnElement="Flow_0d82wo2">
+        <omgdi:waypoint x="985" y="648" />
+        <omgdi:waypoint x="1015" y="648" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bwixd6_di" bpmnElement="Flow_0bwixd6">
+        <omgdi:waypoint x="960" y="623" />
+        <omgdi:waypoint x="960" y="538" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_191lnu5_di" bpmnElement="Flow_191lnu5">
+        <omgdi:waypoint x="960" y="502" />
+        <omgdi:waypoint x="960" y="448" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bd7qsx_di" bpmnElement="Flow_1bd7qsx">
+        <omgdi:waypoint x="960" y="673" />
+        <omgdi:waypoint x="960" y="850" />
+        <omgdi:waypoint x="580" y="850" />
+        <omgdi:waypoint x="580" y="775" />
+        <omgdi:waypoint x="449" y="775" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_157orwx_di" bpmnElement="Flow_157orwx">
+        <omgdi:waypoint x="431" y="757" />
+        <omgdi:waypoint x="431" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00h6o94_di" bpmnElement="Flow_00h6o94">
+        <omgdi:waypoint x="3175" y="690" />
+        <omgdi:waypoint x="3050" y="780" />
+        <omgdi:waypoint x="2440" y="780" />
+        <omgdi:waypoint x="2220" y="820" />
+        <omgdi:waypoint x="1020" y="820" />
+        <omgdi:waypoint x="966" y="667" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0211jzp_di" bpmnElement="Event_11cyy1i">
         <omgdc:Bounds x="413" y="757" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="347.5" y="761" width="55" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0irhh0h_di" bpmnElement="Identify_Missing">
-        <omgdc:Bounds x="381" y="655" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0zf9x7u_di" bpmnElement="Create_Standards">
         <omgdc:Bounds x="520" y="240" width="100" height="80" />
@@ -1831,12 +1857,6 @@
       <bpmndi:BPMNShape id="Gateway_0nj6ywm_gui" bpmnElement="Gateway_0nj6ywm">
         <omgdc:Bounds x="2100" y="770" width="40" height="40" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1mqfq6m_gui" bpmnElement="Event_1mqfq6m">
-        <omgdc:Bounds x="2175" y="775" width="30" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="2135" y="741" width="89" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0xh0bk5_di" bpmnElement="Make_Decision">
         <omgdc:Bounds x="1970" y="515" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -1885,12 +1905,6 @@
           <omgdc:Bounds x="3150" y="478" width="80" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1n5svxi_di" bpmnElement="Event_1mpq7qq">
-        <omgdc:Bounds x="3172" y="662" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="3212" y="681" width="58" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0hft55h_di" bpmnElement="Hire_Candidate">
         <omgdc:Bounds x="3400" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -1904,12 +1918,6 @@
         <omgdc:Bounds x="3835" y="525" width="30" height="30" />
         <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
           <omgdc:Bounds x="3812" y="503" width="78" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_0vytfs6_di" bpmnElement="DataStoreReference_0vytfs6">
-        <omgdc:Bounds x="285" y="670" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="286" y="727" width="48" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1u7kpy7_di" bpmnElement="Rating_Decision">
@@ -1945,6 +1953,27 @@
       <bpmndi:BPMNShape id="Activity_1omfqpg_di" bpmnElement="Pay_Invoice">
         <omgdc:Bounds x="3680" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rxfb7w_di" bpmnElement="Event_1d8mv8n">
+        <omgdc:Bounds x="942" y="502" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="857" y="510" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0j4zbu8_di" bpmnElement="Event_0j4zbu8">
+        <omgdc:Bounds x="942" y="412" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="983" y="416" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1r307uk_di" bpmnElement="Gateway_0e7kkne">
+        <omgdc:Bounds x="935" y="623" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08na6iq_di" bpmnElement="Event_1mpq7qq">
+        <omgdc:Bounds x="3172" y="662" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="3212" y="681" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_1ojr1ra_gui" bpmnElement="DataInputAssociation_1ojr1ra">
         <omgdi:waypoint x="953" y="1249" />
         <omgdi:waypoint x="956" y="1220" />
@@ -1952,10 +1981,6 @@
       <bpmndi:BPMNEdge id="DataOutputAssociation_19a3pf3_gui" bpmnElement="DataOutputAssociation_19a3pf3">
         <omgdi:waypoint x="1671" y="1150" />
         <omgdi:waypoint x="1671" y="1169" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_1563ee4_di" bpmnElement="DataOutputAssociation_1563ee4">
-        <omgdi:waypoint x="381" y="697" />
-        <omgdi:waypoint x="335" y="700" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09_gui" bpmnElement="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09">
         <omgdi:waypoint x="730" y="240" />
