@@ -778,10 +778,10 @@
     <userTask id="Collecting-Job-Information" name="Collecting job information" camunda:assignee="Recruiter">
       <extensionElements>
         <camunda:formData>
+          <camunda:formField id="Job_Name" label="Job" type="string" />
           <camunda:formField id="Job_Description" label="Job Description" type="string" />
-          <camunda:formField id="Job_Salary" label="Approximate Annual Salary in €" type="long" />
-          <camunda:formField id="Job_Name" label="Job Name" type="string" />
-          <camunda:formField id="Job_Address" label="Job Address" type="string" />
+          <camunda:formField id="Job_Salary" label="Approximated annual Salary in €" type="long" />
+          <camunda:formField id="Job_Address" label="Address" type="string" />
         </camunda:formData>
       </extensionElements>
       <incoming>Flow_1rtyngd</incoming>
@@ -818,7 +818,16 @@
     <userTask id="Rating_Decision" name="Rating decision" camunda:assignee="Recruiter">
       <extensionElements>
         <camunda:formData>
-          <camunda:formField id="Candidate_eligible" label="Candidate Eligible" type="boolean" />
+          <camunda:formField id="candidate_id" label="Candidate ID" type="string" />
+          <camunda:formField id="first_name" label="First Name" type="string" />
+          <camunda:formField id="last_name" label="Last Name" type="string" />
+          <camunda:formField id="skills" label="Skills" type="string" />
+          <camunda:formField id="qualifications" label="Qualifications" type="string" />
+          <camunda:formField id="extras" label="Extraordinary Qualifications" type="string" />
+          <camunda:formField id="address" label="Address" type="string" />
+          <camunda:formField id="phone_number" label="Phone " type="string" />
+          <camunda:formField id="email" label="E-Mail" type="string" />
+          <camunda:formField id="Candidate_eligible" label="Candidate eligible?" type="boolean" />
         </camunda:formData>
       </extensionElements>
       <incoming>Flow_1pecmyo</incoming>
@@ -1071,6 +1080,10 @@
     <userTask id="Create_Standards" name="Create standards of eligibility" camunda:assignee="HrManager">
       <extensionElements>
         <camunda:formData>
+          <camunda:formField id="Job_Name" label="Job" type="string" />
+          <camunda:formField id="Job_Description" label="Job Description" type="string" />
+          <camunda:formField id="Job_Salary" label="Approximated annual Salary in €" type="long" />
+          <camunda:formField id="Job_Address" label="Address" type="string" />
           <camunda:formField id="Required_Experience" label="Required Experience in Years" type="string" />
           <camunda:formField id="Required_skills" label="Required Skills" type="string" />
         </camunda:formData>
@@ -1151,6 +1164,14 @@
       <bpmndi:BPMNShape id="sid-517ae040-8fb5-404c-a3d2-8e3d5c31596b_gui" bpmnElement="sid-517ae040-8fb5-404c-a3d2-8e3d5c31596b" isHorizontal="true">
         <omgdc:Bounds x="188" y="960" width="2542" height="370" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0nkzoop_di" bpmnElement="Flow_0nkzoop">
+        <omgdi:waypoint x="2328" y="1110" />
+        <omgdi:waypoint x="2410" y="1110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w26buq_gui" bpmnElement="Flow_1w26buq">
+        <omgdi:waypoint x="755" y="1030" />
+        <omgdi:waypoint x="815" y="1030" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1l4ylt5_di" bpmnElement="Flow_1l4ylt5">
         <omgdi:waypoint x="2136" y="1110" />
         <omgdi:waypoint x="2210" y="1110" />
@@ -1158,10 +1179,6 @@
       <bpmndi:BPMNEdge id="Flow_17idm8s_di" bpmnElement="Flow_17idm8s">
         <omgdi:waypoint x="1080" y="1110" />
         <omgdi:waypoint x="1110" y="1110" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1w26buq_gui" bpmnElement="Flow_1w26buq">
-        <omgdi:waypoint x="755" y="1030" />
-        <omgdi:waypoint x="815" y="1030" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0d7z9wz_gui" bpmnElement="Flow_0d7z9wz">
         <omgdi:waypoint x="790" y="1140" />
@@ -1319,10 +1336,6 @@
         <omgdi:waypoint x="2230" y="1240" />
         <omgdi:waypoint x="2310" y="1240" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0nkzoop_di" bpmnElement="Flow_0nkzoop">
-        <omgdi:waypoint x="2328" y="1110" />
-        <omgdi:waypoint x="2410" y="1110" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Activity_0dx4x8v_gui" bpmnElement="Activity_0dx4x8v">
         <omgdc:Bounds x="1876" y="1210" width="100" height="80" />
         <bpmndi:BPMNLabel labelStyle="sid-60df7189-a643-40cc-af39-3a47238f892a">
@@ -1369,12 +1382,6 @@
         <omgdc:Bounds x="740" y="1140" width="100" height="80" />
         <bpmndi:BPMNLabel labelStyle="sid-60df7189-a643-40cc-af39-3a47238f892a">
           <omgdc:Bounds x="2264.114288330078" y="1356" width="81.77142333984375" height="24" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_114pm8a_gui" bpmnElement="Event_114pm8a">
-        <omgdc:Bounds x="815" y="1015" width="30" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="821" y="1055" width="20" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_069fvfn_gui" bpmnElement="Gateway_069fvfn">
@@ -1488,6 +1495,12 @@
           <omgdc:Bounds x="2669" y="1135" width="42" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_114pm8a_gui" bpmnElement="Event_114pm8a">
+        <omgdc:Bounds x="815" y="1015" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="821" y="1055" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_07fu7h2_di" bpmnElement="Activity_0d46n20">
         <omgdc:Bounds x="2410" y="1070" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -1515,6 +1528,14 @@
           <omgdc:Bounds x="1503" y="820.1714324951172" width="12" height="122.65713500976562" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1y8dxnb_di" bpmnElement="Flow_1y8dxnb">
+        <omgdi:waypoint x="3520" y="540" />
+        <omgdi:waypoint x="3552" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_135pg9g_di" bpmnElement="Flow_135pg9g">
+        <omgdi:waypoint x="3380" y="540" />
+        <omgdi:waypoint x="3420" y="540" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0dgrtux_di" bpmnElement="Flow_0dgrtux">
         <omgdi:waypoint x="570" y="540" />
         <omgdi:waypoint x="570" y="320" />
@@ -1738,57 +1759,175 @@
         <omgdi:waypoint x="1020" y="820" />
         <omgdi:waypoint x="966" y="667" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_135pg9g_di" bpmnElement="Flow_135pg9g">
-        <omgdi:waypoint x="3380" y="540" />
-        <omgdi:waypoint x="3420" y="540" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1y8dxnb_di" bpmnElement="Flow_1y8dxnb">
-        <omgdi:waypoint x="3520" y="540" />
-        <omgdi:waypoint x="3552" y="540" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0211jzp_di" bpmnElement="Event_11cyy1i">
-        <omgdc:Bounds x="413" y="757" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_08na6iq_di" bpmnElement="Event_1mpq7qq">
+        <omgdc:Bounds x="3172" y="662" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="348" y="761" width="55" height="27" />
+          <omgdc:Bounds x="3212" y="681" width="58" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0zf9x7u_di" bpmnElement="Create_Standards">
-        <omgdc:Bounds x="520" y="240" width="100" height="80" />
+      <bpmndi:BPMNShape id="Gateway_1r307uk_di" bpmnElement="Gateway_0e7kkne">
+        <omgdc:Bounds x="935" y="623" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0manlb1_di" bpmnElement="Store_Standards">
-        <omgdc:Bounds x="680" y="240" width="100" height="80" />
+      <bpmndi:BPMNShape id="Event_0j4zbu8_di" bpmnElement="Event_0j4zbu8">
+        <omgdc:Bounds x="942" y="412" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="983" y="416" width="54" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71_gui" bpmnElement="sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71">
-        <omgdc:Bounds x="698" y="116" width="63" height="61" />
+      <bpmndi:BPMNShape id="Event_1rxfb7w_di" bpmnElement="Event_1d8mv8n">
+        <omgdc:Bounds x="942" y="502" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="857" y="510" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1omfqpg_di" bpmnElement="Pay_Invoice">
+        <omgdc:Bounds x="3680" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1cvtmfy_di" bpmnElement="Event_05l1wt8">
+        <omgdc:Bounds x="3612" y="522" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="3591" y="506" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1oow1ws_di" bpmnElement="Send_Employee_Info">
+        <omgdc:Bounds x="3552" y="522" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="3531" y="492" width="78" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vd32sj_di" bpmnElement="Collecting-Job-Information">
+        <omgdc:Bounds x="520" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1pvsily_gui" bpmnElement="Forward_Job_Information" isMarkerVisible="true">
+        <omgdc:Bounds x="411" y="560" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_089j3y5_di" bpmnElement="Send_Approval">
+        <omgdc:Bounds x="2810" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0pijhna_gui" bpmnElement="Event_0pijhna">
+        <omgdc:Bounds x="2615" y="635" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="2628" y="675" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1u7kpy7_di" bpmnElement="Rating_Decision">
+        <omgdc:Bounds x="1260" y="608" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1o2awrf_gui" bpmnElement="Event_1o2awrf">
+        <omgdc:Bounds x="3835" y="525" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="3812" y="503" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_18o5nje_di" bpmnElement="Gateway_18o5nje" isMarkerVisible="true">
+        <omgdc:Bounds x="3165" y="515" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="3150" y="478" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0r1lhy1_di" bpmnElement="Check_Signing">
+        <omgdc:Bounds x="2990" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0o3dtsm_gui" bpmnElement="Candidate_approved_HR" isMarkerVisible="true">
+        <omgdc:Bounds x="2610" y="520" width="40" height="40" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="2544" y="526" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1wc41lq_di" bpmnElement="DataStoreReference_1wc41lq">
+        <omgdc:Bounds x="2445" y="545" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2416" y="593" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vp0axi_di" bpmnElement="Store_Decision">
+        <omgdc:Bounds x="2420" y="430" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0j4u0q8_di" bpmnElement="Decision_HR">
+        <omgdc:Bounds x="2420" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fz0jid_di" bpmnElement="Second_Interview">
+        <omgdc:Bounds x="2240" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pfbnt4_di" bpmnElement="Inive_Second_Interview">
+        <omgdc:Bounds x="2240" y="430" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_00wi8rm_di" bpmnElement="DataStoreReference_00wi8rm">
+        <omgdc:Bounds x="2185" y="645" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2246" y="653" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_12y7wk9_di" bpmnElement="Decision_Recruiter" isMarkerVisible="true">
+        <omgdc:Bounds x="2155" y="530" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="2213" y="542" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xh0bk5_di" bpmnElement="Make_Decision">
+        <omgdc:Bounds x="1970" y="515" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0nj6ywm_gui" bpmnElement="Gateway_0nj6ywm">
+        <omgdc:Bounds x="2100" y="770" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1xghvzu_gui" bpmnElement="Event_1xghvzu">
+        <omgdc:Bounds x="1945" y="775" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="1924" y="741" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gyd8f6_di" bpmnElement="Delete_Candidate">
+        <omgdc:Bounds x="1970" y="655" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1qb1ezi_gui" bpmnElement="Gateway_1qb1ezi">
+        <omgdc:Bounds x="1790" y="770" width="40" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0lc0u44_di" bpmnElement="Candidate_Rejected" isMarkerVisible="true">
+        <omgdc:Bounds x="1695" y="700" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1vrubl9_di" bpmnElement="First_Interview">
+        <omgdc:Bounds x="1840" y="515" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_12xrrpw_di" bpmnElement="Initiate_Interview">
+        <omgdc:Bounds x="1700" y="515" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1ra5e2m_di" bpmnElement="DataStoreReference_1ra5e2m">
+        <omgdc:Bounds x="1543" y="435" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1545" y="423" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04jc1rw_di" bpmnElement="Approve_Candidate">
+        <omgdc:Bounds x="1520" y="515" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_05abcb9_di" bpmnElement="DataStoreReference_05abcb9">
+        <omgdc:Bounds x="1545" y="795" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1546" y="843" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pa8tbe_di" bpmnElement="Deny_Candidate">
+        <omgdc:Bounds x="1520" y="685" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1e2kwsg_gui" bpmnElement="Candidate_approved_Recruiter" isMarkerVisible="true">
+        <omgdc:Bounds x="1430" y="628" width="40" height="40" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="1477" y="638" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_0yg8ui8_di" bpmnElement="Database">
+        <omgdc:Bounds x="1135" y="515" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="1136" y="493" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ydu2nu_di" bpmnElement="Save_Candidate_Information">
+        <omgdc:Bounds x="1110" y="608" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0exwa8h_gui" bpmnElement="DataObjectReference_0exwa8h">
+        <omgdc:Bounds x="1052" y="720" width="36" height="50" />
         <bpmndi:BPMNLabel labelStyle="sid-60df7189-a643-40cc-af39-3a47238f892a">
-          <omgdc:Bounds x="706" y="92" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1pvun1o_di" bpmnElement="Create_Information">
-        <omgdc:Bounds x="680" y="608" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_1dkqp27_di" bpmnElement="DataStoreReference_1dkqp27">
-        <omgdc:Bounds x="705" y="735" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="706" y="795" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1d6h6aj_gui" bpmnElement="Event_1d6h6aj">
-        <omgdc:Bounds x="865" y="633" width="30" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="870" y="600" width="87" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataObjectReference_039flmm_di" bpmnElement="DataObjectReference_039flmm">
-        <omgdc:Bounds x="891" y="756" width="57" height="68" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="892" y="776" width="56" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1_gui" bpmnElement="StartEvent_1">
-        <omgdc:Bounds x="271" y="565" width="30" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="276" y="605" width="25" height="14" />
+          <omgdc:Bounds x="1052" y="776" width="55" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_03el599_gui" bpmnElement="Event_03el599">
@@ -1797,175 +1936,49 @@
           <omgdc:Bounds x="1017" y="600" width="71" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataObjectReference_0exwa8h_gui" bpmnElement="DataObjectReference_0exwa8h">
-        <omgdc:Bounds x="1052" y="720" width="36" height="50" />
+      <bpmndi:BPMNShape id="StartEvent_1_gui" bpmnElement="StartEvent_1">
+        <omgdc:Bounds x="271" y="565" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="276" y="605" width="25" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_039flmm_di" bpmnElement="DataObjectReference_039flmm">
+        <omgdc:Bounds x="891" y="756" width="57" height="68" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="892" y="776" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1d6h6aj_gui" bpmnElement="Event_1d6h6aj">
+        <omgdc:Bounds x="865" y="633" width="30" height="30" />
+        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
+          <omgdc:Bounds x="870" y="600" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_1dkqp27_di" bpmnElement="DataStoreReference_1dkqp27">
+        <omgdc:Bounds x="705" y="735" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="706" y="795" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pvun1o_di" bpmnElement="Create_Information">
+        <omgdc:Bounds x="680" y="608" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71_gui" bpmnElement="sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71">
+        <omgdc:Bounds x="698" y="116" width="63" height="61" />
         <bpmndi:BPMNLabel labelStyle="sid-60df7189-a643-40cc-af39-3a47238f892a">
-          <omgdc:Bounds x="1052" y="776" width="55" height="27" />
+          <omgdc:Bounds x="706" y="92" width="48" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ydu2nu_di" bpmnElement="Save_Candidate_Information">
-        <omgdc:Bounds x="1110" y="608" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_0manlb1_di" bpmnElement="Store_Standards">
+        <omgdc:Bounds x="680" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_0yg8ui8_di" bpmnElement="Database">
-        <omgdc:Bounds x="1135" y="515" width="50" height="50" />
+      <bpmndi:BPMNShape id="Activity_0zf9x7u_di" bpmnElement="Create_Standards">
+        <omgdc:Bounds x="520" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0211jzp_di" bpmnElement="Event_11cyy1i">
+        <omgdc:Bounds x="413" y="757" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1136" y="493" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1e2kwsg_gui" bpmnElement="Candidate_approved_Recruiter" isMarkerVisible="true">
-        <omgdc:Bounds x="1430" y="628" width="40" height="40" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="1477" y="638" width="51" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0pa8tbe_di" bpmnElement="Deny_Candidate">
-        <omgdc:Bounds x="1520" y="685" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_05abcb9_di" bpmnElement="DataStoreReference_05abcb9">
-        <omgdc:Bounds x="1545" y="795" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1546" y="843" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_04jc1rw_di" bpmnElement="Approve_Candidate">
-        <omgdc:Bounds x="1520" y="515" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_1ra5e2m_di" bpmnElement="DataStoreReference_1ra5e2m">
-        <omgdc:Bounds x="1543" y="435" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="1545" y="423" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_12xrrpw_di" bpmnElement="Initiate_Interview">
-        <omgdc:Bounds x="1700" y="515" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1vrubl9_di" bpmnElement="First_Interview">
-        <omgdc:Bounds x="1840" y="515" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0lc0u44_di" bpmnElement="Candidate_Rejected" isMarkerVisible="true">
-        <omgdc:Bounds x="1695" y="700" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1qb1ezi_gui" bpmnElement="Gateway_1qb1ezi">
-        <omgdc:Bounds x="1790" y="770" width="40" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1gyd8f6_di" bpmnElement="Delete_Candidate">
-        <omgdc:Bounds x="1970" y="655" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1xghvzu_gui" bpmnElement="Event_1xghvzu">
-        <omgdc:Bounds x="1945" y="775" width="30" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="1924" y="741" width="71" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0nj6ywm_gui" bpmnElement="Gateway_0nj6ywm">
-        <omgdc:Bounds x="2100" y="770" width="40" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0xh0bk5_di" bpmnElement="Make_Decision">
-        <omgdc:Bounds x="1970" y="515" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_12y7wk9_di" bpmnElement="Decision_Recruiter" isMarkerVisible="true">
-        <omgdc:Bounds x="2155" y="530" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="2213" y="542" width="54" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_00wi8rm_di" bpmnElement="DataStoreReference_00wi8rm">
-        <omgdc:Bounds x="2185" y="645" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="2246" y="653" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0pfbnt4_di" bpmnElement="Inive_Second_Interview">
-        <omgdc:Bounds x="2240" y="430" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0fz0jid_di" bpmnElement="Second_Interview">
-        <omgdc:Bounds x="2240" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0j4u0q8_di" bpmnElement="Decision_HR">
-        <omgdc:Bounds x="2420" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0vp0axi_di" bpmnElement="Store_Decision">
-        <omgdc:Bounds x="2420" y="430" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_1wc41lq_di" bpmnElement="DataStoreReference_1wc41lq">
-        <omgdc:Bounds x="2445" y="545" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="2416" y="593" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0o3dtsm_gui" bpmnElement="Candidate_approved_HR" isMarkerVisible="true">
-        <omgdc:Bounds x="2610" y="520" width="40" height="40" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="2544" y="526" width="56" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0r1lhy1_di" bpmnElement="Check_Signing">
-        <omgdc:Bounds x="2990" y="500" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_18o5nje_di" bpmnElement="Gateway_18o5nje" isMarkerVisible="true">
-        <omgdc:Bounds x="3165" y="515" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="3150" y="478" width="80" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1o2awrf_gui" bpmnElement="Event_1o2awrf">
-        <omgdc:Bounds x="3835" y="525" width="30" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="3812" y="503" width="78" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1u7kpy7_di" bpmnElement="Rating_Decision">
-        <omgdc:Bounds x="1260" y="608" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0pijhna_gui" bpmnElement="Event_0pijhna">
-        <omgdc:Bounds x="2615" y="635" width="30" height="30" />
-        <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
-          <omgdc:Bounds x="2628" y="675" width="51" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_089j3y5_di" bpmnElement="Send_Approval">
-        <omgdc:Bounds x="2810" y="500" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1pvsily_gui" bpmnElement="Forward_Job_Information" isMarkerVisible="true">
-        <omgdc:Bounds x="411" y="560" width="40" height="40" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1vd32sj_di" bpmnElement="Collecting-Job-Information">
-        <omgdc:Bounds x="520" y="540" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1oow1ws_di" bpmnElement="Send_Employee_Info">
-        <omgdc:Bounds x="3552" y="522" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="3531" y="492" width="78" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1cvtmfy_di" bpmnElement="Event_05l1wt8">
-        <omgdc:Bounds x="3612" y="522" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="3591" y="506" width="78" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1omfqpg_di" bpmnElement="Pay_Invoice">
-        <omgdc:Bounds x="3680" y="500" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1rxfb7w_di" bpmnElement="Event_1d8mv8n">
-        <omgdc:Bounds x="942" y="502" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="857" y="510" width="61" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0j4zbu8_di" bpmnElement="Event_0j4zbu8">
-        <omgdc:Bounds x="942" y="412" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="983" y="416" width="54" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1r307uk_di" bpmnElement="Gateway_0e7kkne">
-        <omgdc:Bounds x="935" y="623" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_08na6iq_di" bpmnElement="Event_1mpq7qq">
-        <omgdc:Bounds x="3172" y="662" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="3212" y="681" width="58" height="27" />
+          <omgdc:Bounds x="348" y="761" width="55" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0hft55h_di" bpmnElement="Hire_Candidate">
@@ -1988,33 +2001,33 @@
         <omgdi:waypoint x="1671" y="1150" />
         <omgdi:waypoint x="1671" y="1169" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09_gui" bpmnElement="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09">
-        <omgdi:waypoint x="730" y="240" />
-        <omgdi:waypoint x="729" y="177" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_196mjnv_di" bpmnElement="DataOutputAssociation_196mjnv">
-        <omgdi:waypoint x="730" y="688" />
-        <omgdi:waypoint x="730" y="735" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0gqkuvq_di" bpmnElement="DataOutputAssociation_0gqkuvq">
-        <omgdi:waypoint x="1160" y="608" />
-        <omgdi:waypoint x="1160" y="565" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0xnmij6_di" bpmnElement="DataOutputAssociation_0xnmij6">
-        <omgdi:waypoint x="1570" y="765" />
-        <omgdi:waypoint x="1570" y="795" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0fx2flg_di" bpmnElement="DataOutputAssociation_0fx2flg">
-        <omgdi:waypoint x="1568" y="515" />
-        <omgdi:waypoint x="1568" y="485" />
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0u3on7i_di" bpmnElement="DataOutputAssociation_0u3on7i">
+        <omgdi:waypoint x="2472" y="510" />
+        <omgdi:waypoint x="2474" y="545" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1h7rwtw_di" bpmnElement="DataOutputAssociation_1h7rwtw">
         <omgdi:waypoint x="2070" y="670" />
         <omgdi:waypoint x="2185" y="670" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0u3on7i_di" bpmnElement="DataOutputAssociation_0u3on7i">
-        <omgdi:waypoint x="2472" y="510" />
-        <omgdi:waypoint x="2474" y="545" />
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0fx2flg_di" bpmnElement="DataOutputAssociation_0fx2flg">
+        <omgdi:waypoint x="1568" y="515" />
+        <omgdi:waypoint x="1568" y="485" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0xnmij6_di" bpmnElement="DataOutputAssociation_0xnmij6">
+        <omgdi:waypoint x="1570" y="765" />
+        <omgdi:waypoint x="1570" y="795" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0gqkuvq_di" bpmnElement="DataOutputAssociation_0gqkuvq">
+        <omgdi:waypoint x="1160" y="608" />
+        <omgdi:waypoint x="1160" y="565" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_196mjnv_di" bpmnElement="DataOutputAssociation_196mjnv">
+        <omgdi:waypoint x="730" y="688" />
+        <omgdi:waypoint x="730" y="735" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09_gui" bpmnElement="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09">
+        <omgdi:waypoint x="730" y="240" />
+        <omgdi:waypoint x="729" y="177" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1eqfhs0_di" bpmnElement="DataOutputAssociation_1eqfhs0">
         <omgdi:waypoint x="3470" y="500" />
