@@ -614,7 +614,6 @@
         <flowNodeRef>Candidate_approved_HR</flowNodeRef>
         <flowNodeRef>Check_Signing</flowNodeRef>
         <flowNodeRef>Gateway_18o5nje</flowNodeRef>
-        <flowNodeRef>Hire_Candidate</flowNodeRef>
         <flowNodeRef>Event_1o2awrf</flowNodeRef>
         <flowNodeRef>Rating_Decision</flowNodeRef>
         <flowNodeRef>Event_0pijhna</flowNodeRef>
@@ -628,6 +627,8 @@
         <flowNodeRef>Event_0j4zbu8</flowNodeRef>
         <flowNodeRef>Gateway_0e7kkne</flowNodeRef>
         <flowNodeRef>Event_1mpq7qq</flowNodeRef>
+        <flowNodeRef>Hire_Candidate</flowNodeRef>
+        <flowNodeRef>Activity_16lhw61</flowNodeRef>
       </lane>
       <lane id="sid-9F84BD70-5E5B-4B3D-8520-A51028034E40" name="HR Manager">
         <extensionElements>
@@ -640,315 +641,16 @@
         <flowNodeRef>Decision_HR</flowNodeRef>
       </lane>
     </laneSet>
-    <intermediateCatchEvent id="Event_11cyy1i" name="Notification received">
-      <incoming>Flow_1bd7qsx</incoming>
-      <outgoing>Flow_157orwx</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_0qi4xhi" messageRef="Message_1a6u354" />
-    </intermediateCatchEvent>
-    <userTask id="Create_Standards" name="Create standards of eligibility" camunda:assignee="HrManager">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Required_Experience" label="Required Experience in Years" type="string" />
-          <camunda:formField id="Required_skills" label="Required Skills" type="string" />
-          <camunda:formField id="Required_Education" label="Required Educational Level" type="enum">
-            <camunda:value id="Primary" name="Primary Education" />
-            <camunda:value id="Lower_Seconbdary_Education" name="Lower Secundary Education" />
-            <camunda:value id="Upper_Secondary" name="Upper Secundary Education" />
-            <camunda:value id="Tertiary_Education" name="Tertiary Education" />
-            <camunda:value id="Bachelor" name="Bachelor or equivalent" />
-            <camunda:value id="Master" name="Master or equivalent" />
-            <camunda:value id="Doctorate" name="Doctorate or equivalent" />
-          </camunda:formField>
-          <camunda:formField id="Required_accreditations" label="Required professional licenses, accreditations or certifications" type="string" />
-          <camunda:formField id="Required_Extras" label="Required Extraordinary Skills" type="string" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_0dgrtux</incoming>
-      <outgoing>sid-CC787CD7-8929-4563-B423-646DAB69C4EC</outgoing>
-    </userTask>
-    <serviceTask id="Store_Standards" name="Store standards of eligibility in database" camunda:class="org.wbig.Store_Standards">
-      <extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="Input_34iuq3b" />
-          <camunda:outputParameter name="Output_15ajklo" />
-        </camunda:inputOutput>
-      </extensionElements>
-      <incoming>sid-CC787CD7-8929-4563-B423-646DAB69C4EC</incoming>
-      <outgoing>Flow_00mr8f0</outgoing>
-      <dataOutputAssociation id="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09">
-        <extensionElements>
-          <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        </extensionElements>
-        <sourceRef>Create_Standards</sourceRef>
-        <targetRef>sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
-    <dataStoreReference id="sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71" name="Database" dataStoreRef="sid-679303ae-4a6f-480e-816c-396749aca3ab">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioLabel align="left" ref="text_name" x="8.500499999999988" y="62.5865" />
-      </extensionElements>
-    </dataStoreReference>
-    <serviceTask id="Create_Information" name="Create opening Job information" camunda:class="org.wbig.Create_Opening_Information">
-      <extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="Input_2jq1p2i" />
-          <camunda:outputParameter name="Output_0khucej" />
-        </camunda:inputOutput>
-      </extensionElements>
-      <incoming>Flow_00mr8f0</incoming>
-      <outgoing>Flow_1gdc9wi</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_196mjnv">
-        <targetRef>DataStoreReference_1dkqp27</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
-    <dataStoreReference id="DataStoreReference_1dkqp27" name="Database" />
-    <intermediateThrowEvent id="Event_1d6h6aj" name="Send opening job information">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioLabel align="left" ref="text_name" x="-27.0" y="-33.0" />
-      </extensionElements>
-      <incoming>Flow_1gdc9wi</incoming>
-      <outgoing>Flow_0av22bp</outgoing>
-      <messageEventDefinition id="sid-62b5fa99-9beb-4ade-b722-13ed1ed7de3b" messageRef="Message_0eyb8f5" camunda:class="org.wbig.Send_Job_Information" />
-    </intermediateThrowEvent>
-    <dataObjectReference id="DataObjectReference_039flmm" name="Job&#10;Information" dataObjectRef="DataObject_12bbzd0" />
-    <dataObject id="DataObject_12bbzd0" />
-    <startEvent id="StartEvent_1" name="Start">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioMetaData metaKey="vorgngerprozesse" metaValue="[]" />
-        <signavio:signavioLabel align="left" ref="text_name" x="3.0" y="40.0" />
-      </extensionElements>
-      <outgoing>Flow_011spsz</outgoing>
-    </startEvent>
-    <intermediateCatchEvent id="Event_03el599" name="Candidate info received">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioLabel align="left" ref="text_name" x="-20.0" y="-33.0" />
-      </extensionElements>
-      <incoming>Flow_0d82wo2</incoming>
-      <outgoing>Flow_16l3jsr</outgoing>
-      <messageEventDefinition id="sid-fefa86fe-dfcf-4bf2-8e02-b53eac8177a9" messageRef="Message_0w8fs2h" />
-    </intermediateCatchEvent>
-    <dataObjectReference id="DataObjectReference_0exwa8h" name="Candidate information" dataObjectRef="sid-8049edc0-ea90-4cc4-aa60-75789480af28">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
-        <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-59.0" y="11.0" />
-      </extensionElements>
-    </dataObjectReference>
-    <dataObject id="sid-8049edc0-ea90-4cc4-aa60-75789480af28" name="Candidate information" />
-    <serviceTask id="Save_Candidate_Information" name="Save Candidate Information" camunda:class="org.wbig.Save_Candidate_Info">
-      <incoming>Flow_16l3jsr</incoming>
-      <outgoing>Flow_1pecmyo</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_0gqkuvq">
-        <targetRef>Database</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
-    <dataStoreReference id="Database" name="Database" />
-    <exclusiveGateway id="Candidate_approved_Recruiter" name="Candidate&#10;eligible ?" gatewayDirection="Diverging" camunda:asyncBefore="true">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioLabel ref="text_name" x="45.0" y="10.0" />
-      </extensionElements>
-      <incoming>Flow_0lvzr23</incoming>
-      <outgoing>Flow_0ll75s6</outgoing>
-      <outgoing>Flow_05f4mku</outgoing>
-    </exclusiveGateway>
-    <serviceTask id="Deny_Candidate" name="Deny candidates" camunda:class="org.wbig.DenyCandidates">
-      <incoming>Flow_05f4mku</incoming>
-      <outgoing>Flow_1nljol2</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_0xnmij6">
-        <targetRef>DataStoreReference_05abcb9</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
-    <dataStoreReference id="DataStoreReference_05abcb9" name="Database" />
-    <serviceTask id="Approve_Candidate" name="Approve candidates" camunda:class="org.wbig.Approve_Candidate">
-      <incoming>Flow_0ll75s6</incoming>
-      <outgoing>Flow_0zho4ik</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_0fx2flg">
-        <targetRef>DataStoreReference_1ra5e2m</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
-    <dataStoreReference id="DataStoreReference_1ra5e2m" name="Database" />
-    <userTask id="Initiate_Interview" name="Initiate Interview" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Interview_Date" label="Set Interview Date" type="date" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_0zho4ik</incoming>
-      <outgoing>Flow_0vpo04y</outgoing>
-    </userTask>
-    <manualTask id="First_Interview" name="Interview candidate">
-      <incoming>Flow_0vpo04y</incoming>
-      <outgoing>Flow_19js8po</outgoing>
-    </manualTask>
-    <exclusiveGateway id="Candidate_Rejected" camunda:asyncBefore="true">
-      <incoming>Flow_1nljol2</incoming>
-      <incoming>Flow_1g4h36k</incoming>
-      <incoming>Flow_19plclx</incoming>
-      <outgoing>Flow_16e8okq</outgoing>
-    </exclusiveGateway>
-    <parallelGateway id="Gateway_1qb1ezi" name="" gatewayDirection="Mixed">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-      <incoming>Flow_16e8okq</incoming>
-      <outgoing>Flow_1l96gog</outgoing>
-      <outgoing>Flow_15njq6d</outgoing>
-    </parallelGateway>
-    <serviceTask id="Delete_Candidate" name="Delete Candidate from Database" camunda:class="org.wbig.Delete_Candidate">
-      <incoming>Flow_1l96gog</incoming>
-      <outgoing>Flow_1or71zt</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_1h7rwtw">
-        <targetRef>DataStoreReference_00wi8rm</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
-    <intermediateThrowEvent id="Event_1xghvzu" name="Send rejection information">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioLabel align="left" ref="text_name" x="-20.0" y="-29.0" />
-      </extensionElements>
-      <incoming>Flow_15njq6d</incoming>
-      <outgoing>Flow_0rme5jk</outgoing>
-      <messageEventDefinition id="sid-7ef2c257-a1a8-464b-ba0a-7e86bd6fb3a7" messageRef="Message_03lyxnf" camunda:class="org.wbig.Send_Rejection" />
-    </intermediateThrowEvent>
-    <parallelGateway id="Gateway_0nj6ywm" name="" gatewayDirection="Converging">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-      <incoming>Flow_0rme5jk</incoming>
-      <incoming>Flow_1or71zt</incoming>
-      <outgoing>Flow_1aeegry</outgoing>
-    </parallelGateway>
-    <userTask id="Make_Decision" name="Make decision" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Candidate_Approval" label="Candidate Approved?" type="boolean" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_19js8po</incoming>
-      <outgoing>Flow_0js4sik</outgoing>
-    </userTask>
-    <exclusiveGateway id="Decision_Recruiter" name="Potential candidate?" camunda:asyncBefore="true">
-      <incoming>Flow_0js4sik</incoming>
-      <outgoing>Flow_10uwm4c</outgoing>
-      <outgoing>Flow_19plclx</outgoing>
-    </exclusiveGateway>
-    <dataStoreReference id="DataStoreReference_00wi8rm" name="Database" />
-    <userTask id="Inive_Second_Interview" name="Invite candidate to second interview" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Second_Interview" label="Set up Date for second Interview" type="date" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_10uwm4c</incoming>
-      <outgoing>Flow_1yktk21</outgoing>
-    </userTask>
-    <manualTask id="Second_Interview" name="Interview candidate">
-      <incoming>Flow_1yktk21</incoming>
-      <outgoing>Flow_002za3f</outgoing>
-    </manualTask>
-    <userTask id="Decision_HR" name="Make decision" camunda:assignee="HrManager">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Candidate_Approval1" label="Candidate Approved?" type="boolean" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_002za3f</incoming>
-      <outgoing>Flow_08x0mof</outgoing>
-    </userTask>
-    <serviceTask id="Store_Decision" name="Store decision result in database" camunda:class="org.wbig.Store_Decision">
-      <incoming>Flow_08x0mof</incoming>
-      <outgoing>Flow_0a9s1y6</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_0u3on7i">
-        <targetRef>DataStoreReference_1wc41lq</targetRef>
-      </dataOutputAssociation>
-    </serviceTask>
-    <dataStoreReference id="DataStoreReference_1wc41lq" name="Database" />
-    <exclusiveGateway id="Candidate_approved_HR" name="Candidate approved ?" gatewayDirection="Diverging">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioLabel align="center" ref="text_name" valign="middle" x="36.0" y="-9.0" />
-      </extensionElements>
-      <incoming>Flow_0a9s1y6</incoming>
-      <outgoing>Flow_1tso9sf</outgoing>
-      <outgoing>Flow_0yhbqua</outgoing>
-    </exclusiveGateway>
-    <userTask id="Check_Signing" name="Check for Signing" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Signed" label="Did the candidate sign?" type="boolean" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_1g9s970</incoming>
-      <outgoing>Flow_1ek9sul</outgoing>
-    </userTask>
-    <exclusiveGateway id="Gateway_18o5nje" name="Candidate signs contract?">
-      <incoming>Flow_1ek9sul</incoming>
-      <outgoing>Flow_05ba9dv</outgoing>
-      <outgoing>Flow_0qggprg</outgoing>
-    </exclusiveGateway>
-    <userTask id="Hire_Candidate" name="Hire candidate" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Start_Date" label="Enter Start Date" type="date" />
-          <camunda:formField id="End_Date" label="Enter End Date" type="date" />
-          <camunda:formField id="Surname" label="Surname" type="string" />
-          <camunda:formField id="First_Name" label="First Name" type="string" />
-          <camunda:formField id="E_Mail" label="E-Mail" type="string" />
-          <camunda:formField id="Phone_Number" label="Phone Number" type="long" />
-          <camunda:formField id="Department" label="Department" type="string" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_05ba9dv</incoming>
-      <outgoing>Flow_08kmroz</outgoing>
-      <dataOutputAssociation id="DataOutputAssociation_1eqfhs0">
-        <targetRef>DataStoreReference_0hzq7jk</targetRef>
-      </dataOutputAssociation>
-    </userTask>
-    <dataStoreReference id="DataStoreReference_0hzq7jk" name="Database" />
-    <endEvent id="Event_1o2awrf" name="Candidate hired">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]" />
-        <signavio:signavioLabel align="left" ref="text_name" x="-23.0" y="-22.0" />
-      </extensionElements>
-      <incoming>Flow_0q3t2it</incoming>
-    </endEvent>
-    <userTask id="Rating_Decision" name="Rating decision" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Candidate_eligible" label="Candidate Eligible" type="boolean" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_1pecmyo</incoming>
-      <outgoing>Flow_0lvzr23</outgoing>
-    </userTask>
-    <intermediateThrowEvent id="Event_0pijhna" name="Candidate rejected">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-        <signavio:signavioLabel align="left" ref="text_name" x="-9.0" y="40.0" />
-      </extensionElements>
-      <incoming>Flow_0yhbqua</incoming>
-      <outgoing>Flow_1g4h36k</outgoing>
-    </intermediateThrowEvent>
+    <sequenceFlow id="Flow_00h6o94" sourceRef="Event_1mpq7qq" targetRef="Gateway_0e7kkne" />
+    <sequenceFlow id="Flow_157orwx" sourceRef="Event_11cyy1i" targetRef="Forward_Job_Information" />
+    <sequenceFlow id="Flow_1bd7qsx" sourceRef="Gateway_0e7kkne" targetRef="Event_11cyy1i" />
+    <sequenceFlow id="Flow_191lnu5" sourceRef="Event_1d8mv8n" targetRef="Event_0j4zbu8" />
+    <sequenceFlow id="Flow_0bwixd6" sourceRef="Gateway_0e7kkne" targetRef="Event_1d8mv8n" />
+    <sequenceFlow id="Flow_0d82wo2" sourceRef="Gateway_0e7kkne" targetRef="Event_03el599" />
+    <sequenceFlow id="Flow_1aeegry" sourceRef="Gateway_0nj6ywm" targetRef="Gateway_0e7kkne" />
+    <sequenceFlow id="Flow_05324j2" sourceRef="Event_05l1wt8" targetRef="Pay_Invoice" />
+    <sequenceFlow id="Flow_0z99rs5" sourceRef="Send_Employee_Info" targetRef="Event_05l1wt8" />
     <sequenceFlow id="Flow_1or71zt" sourceRef="Delete_Candidate" targetRef="Gateway_0nj6ywm" />
-    <sequenceFlow id="Flow_08kmroz" sourceRef="Hire_Candidate" targetRef="Send_Employee_Info" />
     <sequenceFlow id="Flow_0qggprg" name="No" sourceRef="Gateway_18o5nje" targetRef="Event_1mpq7qq">
       <conditionExpression xsi:type="tFormalExpression">#{Signed==false}</conditionExpression>
     </sequenceFlow>
@@ -1029,54 +731,30 @@
     <sequenceFlow id="Flow_00mr8f0" sourceRef="Store_Standards" targetRef="Create_Information" />
     <sequenceFlow id="Flow_1yktk21" sourceRef="Inive_Second_Interview" targetRef="Second_Interview" />
     <sequenceFlow id="Flow_0zho4ik" sourceRef="Approve_Candidate" targetRef="Initiate_Interview" />
-    <manualTask id="Send_Approval" name="Send Approval to candidate">
-      <extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="Input_3s4tec3" />
-          <camunda:outputParameter name="Output_3377svc" />
-        </camunda:inputOutput>
-      </extensionElements>
-      <incoming>Flow_1tso9sf</incoming>
-      <outgoing>Flow_1g9s970</outgoing>
-    </manualTask>
-    <exclusiveGateway id="Forward_Job_Information" name="" gatewayDirection="Converging" camunda:asyncBefore="true">
-      <extensionElements>
-        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
-        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
-      </extensionElements>
-      <incoming>Flow_011spsz</incoming>
-      <incoming>Flow_157orwx</incoming>
-      <outgoing>Flow_1rtyngd</outgoing>
-    </exclusiveGateway>
     <sequenceFlow id="Flow_011spsz" sourceRef="StartEvent_1" targetRef="Forward_Job_Information" />
     <sequenceFlow id="Flow_1rtyngd" sourceRef="Forward_Job_Information" targetRef="Collecting-Job-Information" />
     <sequenceFlow id="Flow_0dgrtux" sourceRef="Collecting-Job-Information" targetRef="Create_Standards" />
-    <userTask id="Collecting-Job-Information" name="Collecting job information" camunda:assignee="Recruiter">
-      <extensionElements>
-        <camunda:formData>
-          <camunda:formField id="Job_Description" label="Job Description" type="string" />
-          <camunda:formField id="Job_start_date" label="Start Date" type="date" />
-          <camunda:formField id="Job_End_date" label="End Date" type="date" />
-          <camunda:formField id="Job_Salary" label="Approximate Annual Salary in €" type="long" />
-          <camunda:formField id="Job_Name" label="Job Name" type="string" />
-          <camunda:formField id="Job_Address" label="Job Address" type="string" />
-        </camunda:formData>
-      </extensionElements>
-      <incoming>Flow_1rtyngd</incoming>
-      <outgoing>Flow_0dgrtux</outgoing>
-    </userTask>
-    <intermediateThrowEvent id="Send_Employee_Info" name="Send Employee Info">
-      <incoming>Flow_08kmroz</incoming>
-      <outgoing>Flow_0z99rs5</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_16su785" messageRef="Message_03lyxnf" camunda:class="org.wbig.Send_Employee_Info" />
+    <intermediateThrowEvent id="Event_1mpq7qq" name="Ask for new appllicants">
+      <incoming>Flow_0qggprg</incoming>
+      <outgoing>Flow_00h6o94</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_1dhwqkl" messageRef="Message_156d686" camunda:class="org.wbig.New_Applicants" />
     </intermediateThrowEvent>
-    <intermediateCatchEvent id="Event_05l1wt8" name="Receive Invoice">
-      <incoming>Flow_0z99rs5</incoming>
-      <outgoing>Flow_05324j2</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_1cb7pnk" messageRef="Message_11qsw4n" />
+    <eventBasedGateway id="Gateway_0e7kkne">
+      <incoming>Flow_0av22bp</incoming>
+      <incoming>Flow_1aeegry</incoming>
+      <incoming>Flow_00h6o94</incoming>
+      <outgoing>Flow_0d82wo2</outgoing>
+      <outgoing>Flow_0bwixd6</outgoing>
+      <outgoing>Flow_1bd7qsx</outgoing>
+    </eventBasedGateway>
+    <endEvent id="Event_0j4zbu8" name="No more candidates">
+      <incoming>Flow_191lnu5</incoming>
+    </endEvent>
+    <intermediateCatchEvent id="Event_1d8mv8n" name="Receive info message">
+      <incoming>Flow_0bwixd6</incoming>
+      <outgoing>Flow_191lnu5</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_023lm7o" messageRef="Message_0gfwiqo" />
     </intermediateCatchEvent>
-    <sequenceFlow id="Flow_0z99rs5" sourceRef="Send_Employee_Info" targetRef="Event_05l1wt8" />
-    <sequenceFlow id="Flow_05324j2" sourceRef="Event_05l1wt8" targetRef="Pay_Invoice" />
     <sendTask id="Pay_Invoice" name="Pay invoice" camunda:class="org.wbig.Pay_invoice">
       <extensionElements>
         <camunda:inputOutput>
@@ -1087,34 +765,354 @@
       <incoming>Flow_05324j2</incoming>
       <outgoing>Flow_0q3t2it</outgoing>
     </sendTask>
-    <sequenceFlow id="Flow_1aeegry" sourceRef="Gateway_0nj6ywm" targetRef="Gateway_0e7kkne" />
-    <sequenceFlow id="Flow_0d82wo2" sourceRef="Gateway_0e7kkne" targetRef="Event_03el599" />
-    <intermediateCatchEvent id="Event_1d8mv8n" name="Receive info message">
-      <incoming>Flow_0bwixd6</incoming>
-      <outgoing>Flow_191lnu5</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_023lm7o" messageRef="Message_0gfwiqo" />
+    <intermediateCatchEvent id="Event_05l1wt8" name="Receive Invoice">
+      <incoming>Flow_0z99rs5</incoming>
+      <outgoing>Flow_05324j2</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_1cb7pnk" messageRef="Message_11qsw4n" />
     </intermediateCatchEvent>
-    <sequenceFlow id="Flow_0bwixd6" sourceRef="Gateway_0e7kkne" targetRef="Event_1d8mv8n" />
-    <endEvent id="Event_0j4zbu8" name="No more candidates">
-      <incoming>Flow_191lnu5</incoming>
-    </endEvent>
-    <sequenceFlow id="Flow_191lnu5" sourceRef="Event_1d8mv8n" targetRef="Event_0j4zbu8" />
-    <sequenceFlow id="Flow_1bd7qsx" sourceRef="Gateway_0e7kkne" targetRef="Event_11cyy1i" />
-    <sequenceFlow id="Flow_157orwx" sourceRef="Event_11cyy1i" targetRef="Forward_Job_Information" />
-    <eventBasedGateway id="Gateway_0e7kkne">
-      <incoming>Flow_0av22bp</incoming>
-      <incoming>Flow_1aeegry</incoming>
-      <incoming>Flow_00h6o94</incoming>
-      <outgoing>Flow_0d82wo2</outgoing>
-      <outgoing>Flow_0bwixd6</outgoing>
-      <outgoing>Flow_1bd7qsx</outgoing>
-    </eventBasedGateway>
-    <intermediateThrowEvent id="Event_1mpq7qq" name="Ask for new appllicants">
-      <incoming>Flow_0qggprg</incoming>
-      <outgoing>Flow_00h6o94</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_1dhwqkl" messageRef="Message_156d686" camunda:class="org.wbig.New_Applicants" />
+    <intermediateThrowEvent id="Send_Employee_Info" name="Send Employee Info">
+      <incoming>Flow_1y8dxnb</incoming>
+      <outgoing>Flow_0z99rs5</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_16su785" messageRef="Message_03lyxnf" camunda:class="org.wbig.Send_Employee_Info" />
     </intermediateThrowEvent>
-    <sequenceFlow id="Flow_00h6o94" sourceRef="Event_1mpq7qq" targetRef="Gateway_0e7kkne" />
+    <userTask id="Collecting-Job-Information" name="Collecting job information" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Job_Description" label="Job Description" type="string" />
+          <camunda:formField id="Job_Salary" label="Approximate Annual Salary in €" type="long" />
+          <camunda:formField id="Job_Name" label="Job Name" type="string" />
+          <camunda:formField id="Job_Address" label="Job Address" type="string" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_1rtyngd</incoming>
+      <outgoing>Flow_0dgrtux</outgoing>
+    </userTask>
+    <exclusiveGateway id="Forward_Job_Information" name="" gatewayDirection="Converging" camunda:asyncBefore="true">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+      <incoming>Flow_011spsz</incoming>
+      <incoming>Flow_157orwx</incoming>
+      <outgoing>Flow_1rtyngd</outgoing>
+    </exclusiveGateway>
+    <manualTask id="Send_Approval" name="Send Approval to candidate">
+      <extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_3s4tec3" />
+          <camunda:outputParameter name="Output_3377svc" />
+        </camunda:inputOutput>
+      </extensionElements>
+      <incoming>Flow_1tso9sf</incoming>
+      <outgoing>Flow_1g9s970</outgoing>
+    </manualTask>
+    <intermediateThrowEvent id="Event_0pijhna" name="Candidate rejected">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioLabel align="left" ref="text_name" x="-9.0" y="40.0" />
+      </extensionElements>
+      <incoming>Flow_0yhbqua</incoming>
+      <outgoing>Flow_1g4h36k</outgoing>
+    </intermediateThrowEvent>
+    <userTask id="Rating_Decision" name="Rating decision" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Candidate_eligible" label="Candidate Eligible" type="boolean" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_1pecmyo</incoming>
+      <outgoing>Flow_0lvzr23</outgoing>
+    </userTask>
+    <endEvent id="Event_1o2awrf" name="Candidate hired">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="nachfolgerprozesse" metaValue="[]" />
+        <signavio:signavioLabel align="left" ref="text_name" x="-23.0" y="-22.0" />
+      </extensionElements>
+      <incoming>Flow_0q3t2it</incoming>
+    </endEvent>
+    <exclusiveGateway id="Gateway_18o5nje" name="Candidate signs contract?">
+      <incoming>Flow_1ek9sul</incoming>
+      <outgoing>Flow_05ba9dv</outgoing>
+      <outgoing>Flow_0qggprg</outgoing>
+    </exclusiveGateway>
+    <userTask id="Check_Signing" name="Check for Signing" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Signed" label="Did the candidate sign?" type="boolean" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_1g9s970</incoming>
+      <outgoing>Flow_1ek9sul</outgoing>
+    </userTask>
+    <exclusiveGateway id="Candidate_approved_HR" name="Candidate approved ?" gatewayDirection="Diverging">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioLabel align="center" ref="text_name" valign="middle" x="36.0" y="-9.0" />
+      </extensionElements>
+      <incoming>Flow_0a9s1y6</incoming>
+      <outgoing>Flow_1tso9sf</outgoing>
+      <outgoing>Flow_0yhbqua</outgoing>
+    </exclusiveGateway>
+    <dataStoreReference id="DataStoreReference_1wc41lq" name="Database" />
+    <serviceTask id="Store_Decision" name="Store decision result in database" camunda:class="org.wbig.Store_Decision">
+      <incoming>Flow_08x0mof</incoming>
+      <outgoing>Flow_0a9s1y6</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_0u3on7i">
+        <targetRef>DataStoreReference_1wc41lq</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <userTask id="Decision_HR" name="Make decision" camunda:assignee="HrManager">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Candidate_Approval1" label="Candidate Approved?" type="boolean" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_002za3f</incoming>
+      <outgoing>Flow_08x0mof</outgoing>
+    </userTask>
+    <manualTask id="Second_Interview" name="Interview candidate">
+      <incoming>Flow_1yktk21</incoming>
+      <outgoing>Flow_002za3f</outgoing>
+    </manualTask>
+    <userTask id="Inive_Second_Interview" name="Invite candidate to second interview" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Second_Interview" label="Set up Date for second Interview" type="date" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_10uwm4c</incoming>
+      <outgoing>Flow_1yktk21</outgoing>
+    </userTask>
+    <dataStoreReference id="DataStoreReference_00wi8rm" name="Database" />
+    <exclusiveGateway id="Decision_Recruiter" name="Potential candidate?" camunda:asyncBefore="true">
+      <incoming>Flow_0js4sik</incoming>
+      <outgoing>Flow_10uwm4c</outgoing>
+      <outgoing>Flow_19plclx</outgoing>
+    </exclusiveGateway>
+    <userTask id="Make_Decision" name="Make decision" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Candidate_Approval" label="Candidate Approved?" type="boolean" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_19js8po</incoming>
+      <outgoing>Flow_0js4sik</outgoing>
+    </userTask>
+    <parallelGateway id="Gateway_0nj6ywm" name="" gatewayDirection="Converging">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+      <incoming>Flow_0rme5jk</incoming>
+      <incoming>Flow_1or71zt</incoming>
+      <outgoing>Flow_1aeegry</outgoing>
+    </parallelGateway>
+    <intermediateThrowEvent id="Event_1xghvzu" name="Send rejection information">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioLabel align="left" ref="text_name" x="-20.0" y="-29.0" />
+      </extensionElements>
+      <incoming>Flow_15njq6d</incoming>
+      <outgoing>Flow_0rme5jk</outgoing>
+      <messageEventDefinition id="sid-7ef2c257-a1a8-464b-ba0a-7e86bd6fb3a7" messageRef="Message_03lyxnf" camunda:class="org.wbig.Send_Rejection" />
+    </intermediateThrowEvent>
+    <serviceTask id="Delete_Candidate" name="Delete Candidate from Database" camunda:class="org.wbig.Delete_Candidate">
+      <incoming>Flow_1l96gog</incoming>
+      <outgoing>Flow_1or71zt</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_1h7rwtw">
+        <targetRef>DataStoreReference_00wi8rm</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <parallelGateway id="Gateway_1qb1ezi" name="" gatewayDirection="Mixed">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+      </extensionElements>
+      <incoming>Flow_16e8okq</incoming>
+      <outgoing>Flow_1l96gog</outgoing>
+      <outgoing>Flow_15njq6d</outgoing>
+    </parallelGateway>
+    <exclusiveGateway id="Candidate_Rejected" camunda:asyncBefore="true">
+      <incoming>Flow_1nljol2</incoming>
+      <incoming>Flow_1g4h36k</incoming>
+      <incoming>Flow_19plclx</incoming>
+      <outgoing>Flow_16e8okq</outgoing>
+    </exclusiveGateway>
+    <manualTask id="First_Interview" name="Interview candidate">
+      <incoming>Flow_0vpo04y</incoming>
+      <outgoing>Flow_19js8po</outgoing>
+    </manualTask>
+    <userTask id="Initiate_Interview" name="Initiate Interview" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Interview_Date" label="Set Interview Date" type="date" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_0zho4ik</incoming>
+      <outgoing>Flow_0vpo04y</outgoing>
+    </userTask>
+    <dataStoreReference id="DataStoreReference_1ra5e2m" name="Database" />
+    <serviceTask id="Approve_Candidate" name="Approve candidates" camunda:class="org.wbig.Approve_Candidate">
+      <incoming>Flow_0ll75s6</incoming>
+      <outgoing>Flow_0zho4ik</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_0fx2flg">
+        <targetRef>DataStoreReference_1ra5e2m</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <dataStoreReference id="DataStoreReference_05abcb9" name="Database" />
+    <serviceTask id="Deny_Candidate" name="Deny candidates" camunda:class="org.wbig.DenyCandidates">
+      <incoming>Flow_05f4mku</incoming>
+      <outgoing>Flow_1nljol2</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_0xnmij6">
+        <targetRef>DataStoreReference_05abcb9</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <exclusiveGateway id="Candidate_approved_Recruiter" name="Candidate&#10;eligible ?" gatewayDirection="Diverging" camunda:asyncBefore="true">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioLabel ref="text_name" x="45.0" y="10.0" />
+      </extensionElements>
+      <incoming>Flow_0lvzr23</incoming>
+      <outgoing>Flow_0ll75s6</outgoing>
+      <outgoing>Flow_05f4mku</outgoing>
+    </exclusiveGateway>
+    <dataStoreReference id="Database" name="Database" />
+    <serviceTask id="Save_Candidate_Information" name="Save Candidate Information" camunda:class="org.wbig.Save_Candidate_Info">
+      <incoming>Flow_16l3jsr</incoming>
+      <outgoing>Flow_1pecmyo</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_0gqkuvq">
+        <targetRef>Database</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <dataObjectReference id="DataObjectReference_0exwa8h" name="Candidate information" dataObjectRef="sid-8049edc0-ea90-4cc4-aa60-75789480af28">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="externaldocuments" metaValue="[]" />
+        <signavio:signavioLabel align="left" ref="text_name" valign="top" x="-59.0" y="11.0" />
+      </extensionElements>
+    </dataObjectReference>
+    <dataObject id="sid-8049edc0-ea90-4cc4-aa60-75789480af28" name="Candidate information" />
+    <intermediateCatchEvent id="Event_03el599" name="Candidate info received">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioLabel align="left" ref="text_name" x="-20.0" y="-33.0" />
+      </extensionElements>
+      <incoming>Flow_0d82wo2</incoming>
+      <outgoing>Flow_16l3jsr</outgoing>
+      <messageEventDefinition id="sid-fefa86fe-dfcf-4bf2-8e02-b53eac8177a9" messageRef="Message_0w8fs2h" />
+    </intermediateCatchEvent>
+    <startEvent id="StartEvent_1" name="Start">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioMetaData metaKey="vorgngerprozesse" metaValue="[]" />
+        <signavio:signavioLabel align="left" ref="text_name" x="3.0" y="40.0" />
+      </extensionElements>
+      <outgoing>Flow_011spsz</outgoing>
+    </startEvent>
+    <dataObjectReference id="DataObjectReference_039flmm" name="Job&#10;Information" dataObjectRef="DataObject_12bbzd0" />
+    <dataObject id="DataObject_12bbzd0" />
+    <intermediateThrowEvent id="Event_1d6h6aj" name="Send opening job information">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioLabel align="left" ref="text_name" x="-27.0" y="-33.0" />
+      </extensionElements>
+      <incoming>Flow_1gdc9wi</incoming>
+      <outgoing>Flow_0av22bp</outgoing>
+      <messageEventDefinition id="sid-62b5fa99-9beb-4ade-b722-13ed1ed7de3b" messageRef="Message_0eyb8f5" camunda:class="org.wbig.Send_Job_Information" />
+    </intermediateThrowEvent>
+    <dataStoreReference id="DataStoreReference_1dkqp27" name="Database" />
+    <serviceTask id="Create_Information" name="Create opening Job information" camunda:class="org.wbig.Create_Opening_Information">
+      <extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_2jq1p2i" />
+          <camunda:outputParameter name="Output_0khucej" />
+        </camunda:inputOutput>
+      </extensionElements>
+      <incoming>Flow_00mr8f0</incoming>
+      <outgoing>Flow_1gdc9wi</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_196mjnv">
+        <targetRef>DataStoreReference_1dkqp27</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <dataStoreReference id="sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71" name="Database" dataStoreRef="sid-679303ae-4a6f-480e-816c-396749aca3ab">
+      <extensionElements>
+        <signavio:signavioMetaData metaKey="bgcolor" metaValue="#ffffff" />
+        <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        <signavio:signavioLabel align="left" ref="text_name" x="8.500499999999988" y="62.5865" />
+      </extensionElements>
+    </dataStoreReference>
+    <serviceTask id="Store_Standards" name="Store standards of eligibility in database" camunda:class="org.wbig.Store_Standards">
+      <extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_34iuq3b" />
+          <camunda:outputParameter name="Output_15ajklo" />
+        </camunda:inputOutput>
+      </extensionElements>
+      <incoming>sid-CC787CD7-8929-4563-B423-646DAB69C4EC</incoming>
+      <outgoing>Flow_00mr8f0</outgoing>
+      <dataOutputAssociation id="sid-DF72FF77-7DE2-46F3-B005-8CF2FB501C09">
+        <extensionElements>
+          <signavio:signavioMetaData metaKey="bordercolor" metaValue="#000000" />
+        </extensionElements>
+        <sourceRef>Create_Standards</sourceRef>
+        <targetRef>sid-1CD0EC0A-AFC3-468B-9A3E-48886D355D71</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
+    <userTask id="Create_Standards" name="Create standards of eligibility" camunda:assignee="HrManager">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Required_Experience" label="Required Experience in Years" type="string" />
+          <camunda:formField id="Required_skills" label="Required Skills" type="string" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_0dgrtux</incoming>
+      <outgoing>sid-CC787CD7-8929-4563-B423-646DAB69C4EC</outgoing>
+    </userTask>
+    <intermediateCatchEvent id="Event_11cyy1i" name="Notification received">
+      <incoming>Flow_1bd7qsx</incoming>
+      <outgoing>Flow_157orwx</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_0qi4xhi" messageRef="Message_1a6u354" />
+    </intermediateCatchEvent>
+    <userTask id="Hire_Candidate" name="Hire candidate" camunda:assignee="Recruiter">
+      <extensionElements>
+        <camunda:formData>
+          <camunda:formField id="Start_Date" label="Enter Start Date" type="date" />
+          <camunda:formField id="End_Date" label="Enter End Date" type="date" />
+          <camunda:formField id="Surname" label="Surname" type="string" />
+          <camunda:formField id="First_Name" label="First Name" type="string" />
+          <camunda:formField id="E_Mail" label="E-Mail" type="string" />
+          <camunda:formField id="Phone_Number" label="Phone Number" type="long" />
+          <camunda:formField id="Dob" label="Day of birth" type="date" />
+          <camunda:formField id="Employee_Address" label="Address" type="string" />
+          <camunda:formField id="Employee_Job" label="Job" type="string" />
+          <camunda:formField id="Employee_Job_Desc" label="Job description" type="string" />
+          <camunda:formField id="hours_per_week" label="Hours per week" type="string" />
+          <camunda:formField id="Employee_Duties" label="Duties" type="string" />
+        </camunda:formData>
+      </extensionElements>
+      <incoming>Flow_05ba9dv</incoming>
+      <outgoing>Flow_135pg9g</outgoing>
+    </userTask>
+    <dataStoreReference id="DataStoreReference_0hzq7jk" name="Database" />
+    <sequenceFlow id="Flow_135pg9g" sourceRef="Hire_Candidate" targetRef="Activity_16lhw61" />
+    <sequenceFlow id="Flow_1y8dxnb" sourceRef="Activity_16lhw61" targetRef="Send_Employee_Info" />
+    <serviceTask id="Activity_16lhw61" name="Save Employee in Database" camunda:class="org.wbig.Save_Employee">
+      <incoming>Flow_135pg9g</incoming>
+      <outgoing>Flow_1y8dxnb</outgoing>
+      <dataOutputAssociation id="DataOutputAssociation_1eqfhs0">
+        <targetRef>DataStoreReference_0hzq7jk</targetRef>
+      </dataOutputAssociation>
+    </serviceTask>
   </process>
   <message id="Message_0eyb8f5" name="Job_Information" />
   <message id="Message_0ne5ynd" />
@@ -1140,7 +1138,7 @@
   <message id="Message_1me6and" name="JobInformation" />
   <message id="Message_1uwljyf" name="Message_0et3jrb" />
   <message id="Message_11qsw4n" name="Receive_Invoice" />
-  <message id="Message_0gfwiqo" name="No_more_candidates" />
+  <message id="Message_0gfwiqo" name="no_more_applicants" />
   <message id="Message_156d686" name="Message_3e34ssn" />
   <bpmndi:BPMNDiagram id="sid-b8176f82-affc-4f98-bb91-8427c2a8a9bf">
     <bpmndi:BPMNPlane id="sid-629350ca-9e37-486d-9889-7c0d9b434fe1" bpmnElement="WBIG">
@@ -1571,9 +1569,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_05ba9dv_di" bpmnElement="Flow_05ba9dv">
         <omgdi:waypoint x="3215" y="540" />
-        <omgdi:waypoint x="3400" y="540" />
+        <omgdi:waypoint x="3280" y="540" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="3281" y="518" width="18" height="14" />
+          <omgdc:Bounds x="3232" y="518" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1g9s970_di" bpmnElement="Flow_1g9s970">
@@ -1690,10 +1688,6 @@
           <omgdc:Bounds x="3199" y="614" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_08kmroz_di" bpmnElement="Flow_08kmroz">
-        <omgdi:waypoint x="3500" y="540" />
-        <omgdi:waypoint x="3552" y="540" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1or71zt_di" bpmnElement="Flow_1or71zt">
         <omgdi:waypoint x="2070" y="695" />
         <omgdi:waypoint x="2120" y="695" />
@@ -1744,10 +1738,18 @@
         <omgdi:waypoint x="1020" y="820" />
         <omgdi:waypoint x="966" y="667" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_135pg9g_di" bpmnElement="Flow_135pg9g">
+        <omgdi:waypoint x="3380" y="540" />
+        <omgdi:waypoint x="3420" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1y8dxnb_di" bpmnElement="Flow_1y8dxnb">
+        <omgdi:waypoint x="3520" y="540" />
+        <omgdi:waypoint x="3552" y="540" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0211jzp_di" bpmnElement="Event_11cyy1i">
         <omgdc:Bounds x="413" y="757" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="347.5" y="761" width="55" height="27" />
+          <omgdc:Bounds x="348" y="761" width="55" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0zf9x7u_di" bpmnElement="Create_Standards">
@@ -1906,15 +1908,6 @@
           <omgdc:Bounds x="3150" y="478" width="80" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0hft55h_di" bpmnElement="Hire_Candidate">
-        <omgdc:Bounds x="3400" y="500" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="DataStoreReference_0hzq7jk_di" bpmnElement="DataStoreReference_0hzq7jk">
-        <omgdc:Bounds x="3425" y="415" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="3395" y="465" width="48" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1o2awrf_gui" bpmnElement="Event_1o2awrf">
         <omgdc:Bounds x="3835" y="525" width="30" height="30" />
         <bpmndi:BPMNLabel labelStyle="sid-1c216dce-0780-4490-b7d9-b4fb48b395c3">
@@ -1975,6 +1968,18 @@
           <omgdc:Bounds x="3212" y="681" width="58" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hft55h_di" bpmnElement="Hire_Candidate">
+        <omgdc:Bounds x="3280" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataStoreReference_0hzq7jk_di" bpmnElement="DataStoreReference_0hzq7jk">
+        <omgdc:Bounds x="3455" y="405" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="3425" y="455" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ild3t4_di" bpmnElement="Activity_16lhw61">
+        <omgdc:Bounds x="3420" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_1ojr1ra_gui" bpmnElement="DataInputAssociation_1ojr1ra">
         <omgdi:waypoint x="953" y="1249" />
         <omgdi:waypoint x="956" y="1220" />
@@ -2012,8 +2017,8 @@
         <omgdi:waypoint x="2474" y="545" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1eqfhs0_di" bpmnElement="DataOutputAssociation_1eqfhs0">
-        <omgdi:waypoint x="3450" y="500" />
-        <omgdi:waypoint x="3450" y="465" />
+        <omgdi:waypoint x="3470" y="500" />
+        <omgdi:waypoint x="3476" y="455" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0hlkwb3_gui" bpmnElement="Flow_0hlkwb3">
         <omgdi:waypoint x="1840" y="1095" />

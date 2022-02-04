@@ -37,19 +37,20 @@ LOGGER.info("SENDING");
         //HttpPost httppost = new HttpPost("http://141.26.157.242:8080/engine-rest/message");
 // Request parameters and other properties.
         String job_json = "{\r\n" +
-                "\"messageName\": \"Candidate_Info_Received\",\r\n" +
+                "\"messageName\": \"job_details\",\r\n" +
                 "\"processVariables\" : {" +
                 "\"job_post_id\": {\"value\": \"0\", \"type\": \"String\"}, \r\n   " +
                 "\"job_title\": {\"value\": \""+execution.getVariable("Job_Name")+"\", \"type\": \"String\"}, \r\n   " +
                 "\"job_description\": {\"value\": \""+execution.getVariable("Job_Description")+"\", \"type\": \"String\"}, \r\n   " +
                 "\"salary_in_euros\": {\"value\": \""+execution.getVariable("Job_Salary")+"\", \"type\": \"long\"}, \r\n   " +
-                "\"min_job_experience_required_years\": {\"value\": \"5\", \"type\": \"long\"}, \r\n   " +
+                "\"min_job_experience_required_years\": {\"value\": \""+execution.getVariable("Required_Experience")+"\", \"type\": \"long\"}, \r\n   " +
                 "\"skills_required\": {\"value\": \""+execution.getVariable("Required_skills")+"\", \"type\": \"String\"}, \r\n   " +
                 "\"office_address\": {\"value\": \""+execution.getVariable("Job_Address")+"\", \"type\": \"String\"}, \r\n   " +
                 "\"complete\": {\"value\": \"true\", \"type\": \"String\"} \r\n   " +
                 "}" +
                 "}";
         LOGGER.info(job_json);
+        /*
         StringEntity stringEntity = new StringEntity(job_json,"UTF-8");
         httppost.setHeader("Accept", "application/json");
         httppost.setHeader("Content-type", "application/json");
@@ -65,7 +66,7 @@ LOGGER.info("SENDING");
                 LOGGER.info(instream.toString());
             }
         }
-
+*/
 
 
         /*

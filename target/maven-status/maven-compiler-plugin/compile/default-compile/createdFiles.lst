@@ -1,11 +1,13 @@
 org\wbig\Send_Rejection.class
 org\wbig\Ask_Applicants.class
+org\wbig\Save_Employee.class
 org\wbig\Database.class
 org\wbig\DenyCandidates.class
 org\wbig\Save_Candidate_Info.class
 org\wbig\Approve_Candidate.class
 org\wbig\Create_Opening_Information.class
 org\wbig\Receive_Candidate.class
+org\wbig\Decision_Candidate.class
 org\wbig\Store_Standards.class
 org\wbig\Send_Job_Information.class
 org\wbig\Pay_invoice.class
