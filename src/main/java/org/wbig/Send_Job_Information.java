@@ -38,6 +38,7 @@ LOGGER.info("SENDING");
 // Request parameters and other properties.
         String job_json = "{\r\n" +
                 "\"messageName\": \"job_details\",\r\n" +
+                //"\"businessKey\": \""+ execution.getBusinessKey()+"\",\r\n" +     //or execution.getProcessBusinessKey()
                 "\"processVariables\" : {" +
                 "\"job_post_id\": {\"value\": \"0\", \"type\": \"String\"}, \r\n   " +
                 "\"job_title\": {\"value\": \""+execution.getVariable("Job_Name")+"\", \"type\": \"String\"}, \r\n   " +
